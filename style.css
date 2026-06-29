@@ -1,0 +1,267 @@
+:root {            
+            --primary: #4361ee;            
+            --primary-light: #4895ef;            
+            --secondary: #f72585;            
+            --bg-body: #f8faff;            
+            --bg-card: #ffffff;            
+            --text-main: #1e293b;            
+            --text-muted: #64748b;            
+            --border: #e2e8f0;            
+            --nav-bg: rgba(255, 255, 255, 0.85);            
+            --accent-gradient: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);        
+        }
+
+        .dark {            
+            --bg-body: #0f172a;            
+            --bg-card: #1e293b;            
+            --text-main: #f8fafc;            
+            --text-muted: #94a3b8;            
+            --border: #334155;            
+            --nav-bg: rgba(15, 23, 42, 0.85);        
+        }
+
+        html, body {            
+            max-width: 100%;            
+            overflow-x: hidden;            
+            position: relative;        
+        }
+
+        body {            
+            background-color: var(--bg-body);            
+            color: var(--text-main);            
+            font-family: 'Inter', sans-serif;            
+            transition: background-color 0.4s ease, color 0.4s ease;        
+        }
+
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        
+        /* Subtle Grid Pattern Background */
+        .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .dark .bg-grid-pattern {
+            background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+        }
+
+        .rgb-bg-animate {            
+            background: linear-gradient(-45deg,                 
+                rgba(67, 97, 238, 0.05),                 
+                rgba(247, 37, 133, 0.05),                 
+                rgba(72, 149, 239, 0.05),                 
+                rgba(114, 9, 183, 0.05)            
+            );            
+            background-size: 400% 400%;            
+            animation: gradient-flow 12s ease infinite;        
+        }
+
+        .dark .rgb-bg-animate {            
+            background: linear-gradient(-45deg,                 
+                rgba(67, 97, 238, 0.1),                 
+                rgba(247, 37, 133, 0.1),                 
+                rgba(15, 23, 42, 1),                 
+                rgba(114, 9, 183, 0.1)            
+            );            
+            background-size: 400% 400%;        
+        }
+
+        @keyframes gradient-flow {            
+            0% { background-position: 0% 50%; }            
+            50% { background-position: 100% 50%; }            
+            100% { background-position: 0% 50%; }        
+        }
+
+        /* Fluid Morphing Blob Animation */
+        .blob-shape {
+            animation: morph-blob 20s ease-in-out infinite alternate;
+        }
+        @keyframes morph-blob {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(0, 0) rotate(0deg) scale(1); }
+            50% { border-radius: 30% 60% 70% 30% / 50% 60% 30% 50%; transform: translate(20px, 40px) rotate(180deg) scale(1.05); }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(-20px, -40px) rotate(360deg) scale(0.95); }
+        }
+
+        .glass-nav {            
+            backdrop-filter: blur(16px);            
+            -webkit-backdrop-filter: blur(16px);            
+            background: var(--nav-bg) !important;            
+            border-bottom: 1px solid var(--border);        
+        }
+
+        /* NEW: Hero Image Background Aura Animation */
+        .hero-img-wrap {            
+            animation: float 6s ease-in-out infinite;        
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .aura-animate {
+            animation: rotate-aura 12s linear infinite;
+        }
+        .aura-animate-reverse {
+            animation: rotate-aura-reverse 16s linear infinite;
+        }
+        @keyframes rotate-aura {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        @keyframes rotate-aura-reverse {
+            0% { transform: rotate(360deg) scale(1); }
+            50% { transform: rotate(180deg) scale(0.95); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        .cursor-blink {            
+            display: inline-block;            
+            width: 3px;            
+            background-color: var(--primary);            
+            margin-left: 4px;            
+            animation: blink 0.8s infinite;        
+        }        
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .progress-bar-container {             
+            background: var(--border);             
+            transition: background-color 0.4s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }        
+        .progress-bar-fill {            
+            width: 0;            
+            transition: width 1.5s cubic-bezier(0.17, 0.55, 0.55, 1);            
+            background: var(--accent-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .skill-card, .project-card, .edu-card, .cert-card {            
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);            
+            background-color: var(--bg-card);            
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }                
+        
+        .shine-layer {
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: skewX(-20deg);
+            transition: 0.7s;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .dark .shine-layer {
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        }
+        .skill-card:hover .shine-layer, .project-card:hover .shine-layer, .edu-card:hover .shine-layer, .cert-card:hover .shine-layer {
+            left: 150%;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }        
+        ::-webkit-scrollbar-track { background: var(--bg-body); }        
+        ::-webkit-scrollbar-thumb {            
+            background: var(--primary);            
+            border-radius: 10px;        
+        }
+
+        #mobile-menu {            
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s;            
+        }
+
+        #theme-icon {            
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;        
+        }                
+        
+        .section-alt {            
+            background-color: rgba(67, 97, 238, 0.02);        
+        }        
+        .dark .section-alt {            
+            background-color: rgba(15, 23, 42, 0.4);        
+        }
+
+        .mouse {            
+            width: 22px;            
+            height: 36px;            
+            border: 2px solid var(--text-muted);            
+            border-radius: 20px;            
+            display: flex;            
+            justify-content: center;            
+            padding-top: 6px;        
+        }        
+        .wheel {            
+            width: 4px;            
+            height: 6px;            
+            background-color: var(--primary);            
+            border-radius: 2px;            
+            animation: scroll-anim 2s infinite;        
+        }        
+        @keyframes scroll-anim {            
+            0% { transform: translateY(0); opacity: 1; }            
+            100% { transform: translateY(12px); opacity: 0; }        
+        }
+
+        .text-shine {            
+            background: linear-gradient(to right, #4361ee 0%, #7209b7 50%, #4361ee 100%);            
+            background-size: 200% auto;            
+            color: transparent;            
+            -webkit-background-clip: text;            
+            background-clip: text;            
+            animation: shine 5s linear infinite;        
+        }        
+        @keyframes shine { to { background-position: 200% center; } }                
+        
+        .project-glow {            
+            position: absolute;            
+            inset: -2px;            
+            background: linear-gradient(45deg, #4361ee, #7209b7, #f72585, #4361ee);            
+            z-index: -1;            
+            filter: blur(15px);            
+            opacity: 0;            
+            transition: opacity 0.4s ease;            
+            border-radius: 2.6rem;        
+        }        
+        .project-card:hover .project-glow {            
+            opacity: 0.75;        
+        }
+
+        .icon-float {            
+            animation: icon-float 4s ease-in-out infinite;        
+        }        
+        @keyframes icon-float {            
+            0%, 100% { transform: translateY(0); }            
+            50% { transform: translateY(-12px); }        
+        }    
+
+        /* Animated Auto-Color Change Text */
+        .color-cycle-text {
+            background: linear-gradient(90deg, #f72585, #7209b7, #4361ee, #4895ef, #f72585);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: colorCycle 5s linear infinite;
+        }
+        @keyframes colorCycle {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
