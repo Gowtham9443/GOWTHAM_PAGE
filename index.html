@@ -1,586 +1,609 @@
-<html lang="en" class="scroll-smooth"><head>    
-    <meta charset="UTF-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">    
-    <title>Gowtham M | Portfolio</title>        
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gowtham M | Portfolio</title>
     
-    <!-- External Resources -->    
-    <script src="https://cdn.tailwindcss.com"></script>    
+    <!-- External Resources -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Tailwind Configuration for Dark Mode -->
+    <!-- Tailwind Configuration for Space Blue Theme -->
     
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">    
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
     
     
 <link rel="stylesheet" href="style.css"></head>
 <body class="antialiased overflow-x-hidden bg-grid-pattern">
     
-    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full font-bold shadow-2xl transition-all duration-500 translate-y-24 opacity-0 z-[2000] flex items-center text-sm md:text-base">        
-        <i class="fas fa-check-circle mr-2"></i> Opening WhatsApp...    
+    <div id="scroll-progress"></div>
+
+    <canvas id="space-canvas" class="hidden dark:block"></canvas>
+    <div class="starfield hidden dark:block"></div>
+    <div class="twinkling-stars hidden dark:block"></div>
+    <div class="shooting-star hidden dark:block" style="top: 10%; left: 30%; animation-delay: 0s;"></div>
+    <div class="shooting-star hidden dark:block" style="top: 25%; left: 80%; animation-delay: 2.5s;"></div>
+    <div class="shooting-star hidden dark:block" style="top: 60%; left: 15%; animation-delay: 4.2s;"></div>
+    <div class="shooting-star hidden dark:block" style="top: 5%; left: 60%; animation-delay: 1.5s;"></div>
+    <div class="shooting-star hidden dark:block" style="top: 45%; left: 90%; animation-delay: 7.1s;"></div>
+
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-full font-bold shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all duration-500 translate-y-24 opacity-0 z-[2000] flex items-center text-sm md:text-base border border-primaryLight backdrop-blur-md">
+        <i class="fas fa-paper-plane mr-2"></i> Opening WhatsApp...
     </div>
     
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 h-20 flex items-center">        
-        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">            
-            <a href="#" class="text-xl md:text-2xl font-extrabold tracking-tight hover:scale-105 transition-transform text-slate-900 dark:text-white">                
-                Gowtham<span class="text-blue-600">.</span>            
+    <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 pt-4 md:pt-6 px-3 md:px-6">
+        <div id="navbar-inner" class="glass-nav container mx-auto max-w-6xl px-4 md:px-6 py-3 md:py-4 rounded-full border flex justify-between items-center shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300">
+            <a href="#" class="text-xl md:text-2xl font-extrabold tracking-tight hover:scale-105 transition-transform text-slate-900 dark:text-white flex items-center gap-1">
+                Gowtham<span class="text-secondary">.</span>
             </a>
 
-            <!-- Desktop Menu -->            
-            <ul class="hidden lg:flex items-center space-x-8 font-medium text-slate-700 dark:text-slate-200">                
-                <li><a href="#home" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">Home</a></li>                
-                <li><a href="#about" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">About</a></li>                
-                <li><a href="#education" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">Education</a></li>                
-                <li><a href="#skills" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">Skills</a></li>                
-                <li><a href="#portfolio" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">Portfolio</a></li>                
-                <li><a href="#publications" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">Publications</a></li>
-                <li><a href="#certificates" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">Certificates</a></li>                
-                <li><a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-blue-600 after:transition-all hover:after:w-full">Contact</a></li>            
+            <!-- Desktop Menu -->
+            <ul class="hidden lg:flex items-center space-x-6 lg:space-x-8 font-medium text-slate-700 dark:text-slate-300 text-sm">
+                <li><a href="#home" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">Home</a></li>
+                <li><a href="#about" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">About</a></li>
+                <li><a href="#education" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">Education</a></li>
+                <li><a href="#skills" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">Skills</a></li>
+                <li><a href="#portfolio" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">Portfolio</a></li>
+                <li><a href="#publications" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">Publications</a></li>
+                <li><a href="#certificates" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">Certificates</a></li>
+                <li><a href="#contact" class="hover:text-primary transition-colors font-semibold relative after:content-[''] after:absolute after:bottom-[-4px] after:left-1/2 after:-translate-x-1/2 after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-primary after:to-secondary after:transition-all hover:after:w-full">Contact</a></li>
             </ul>
 
-            <div class="flex items-center space-x-3 md:space-x-4">                
-                <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-200/50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-200 hover:scale-110 hover:bg-blue-600 hover:text-white transition-all shadow-sm focus:outline-none">                    
-                    <i id="theme-icon" class="fas fa-moon"></i>                
-                </button>                
-                <button id="mobile-toggle" class="lg:hidden p-2.5 text-2xl text-slate-900 dark:text-white hover:text-blue-600 transition-colors focus:outline-none">                    
-                    <i class="fas fa-bars"></i>                
-                </button>            
-            </div>        
-        </div>    
+            <div class="flex items-center space-x-3 md:space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full bg-slate-200 dark:bg-white/5 border border-transparent dark:border-white/10 text-slate-700 dark:text-slate-200 hover:scale-110 transition-all focus:outline-none w-10 h-10 flex items-center justify-center shadow-sm">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <button id="mobile-toggle" class="lg:hidden p-2 text-2xl text-slate-900 dark:text-white hover:text-primary transition-colors focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-slate-900/95 dark:bg-slate-900/98 z-[60] lg:hidden flex flex-col items-center justify-center space-y-6 text-xl md:text-2xl font-bold text-white translate-x-full invisible backdrop-blur-xl">        
-        <button id="mobile-close" class="absolute top-6 right-6 text-4xl hover:text-blue-500 transition-colors focus:outline-none">×</button>        
-        <a href="#home" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">Home</a>        
-        <a href="#about" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">About</a>        
-        <a href="#education" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">Education</a>        
-        <a href="#skills" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">Skills</a>        
-        <a href="#portfolio" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">Portfolio</a>        
-        <a href="#publications" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">Publications</a>
-        <a href="#certificates" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">Certificates</a>        
-        <a href="#contact" class="mobile-link hover:text-blue-400 transition-colors tracking-wide py-2">Contact</a>    
+    <div id="mobile-menu" class="fixed inset-0 bg-slate-900/95 dark:bg-slate-950/98 z-[60] lg:hidden flex flex-col items-center justify-center space-y-6 text-xl md:text-2xl font-bold text-white translate-x-full invisible backdrop-blur-xl">
+        <button id="mobile-close" class="absolute top-6 right-6 text-4xl hover:text-primaryLight transition-colors focus:outline-none">×</button>
+        <a href="#home" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">Home</a>
+        <a href="#about" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">About</a>
+        <a href="#education" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">Education</a>
+        <a href="#skills" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">Skills</a>
+        <a href="#portfolio" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">Portfolio</a>
+        <a href="#publications" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">Publications</a>
+        <a href="#certificates" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">Certificates</a>
+        <a href="#contact" class="mobile-link hover:text-primaryLight transition-colors tracking-wide py-2">Contact</a>
     </div>
 
-    <section id="home" class="min-h-screen flex items-center pt-24 pb-12 px-4 md:px-6 relative overflow-hidden rgb-bg-animate">        
-        <!-- Abstract morphing backgrounds optimized for mobile -->        
-        <div class="absolute top-[-10%] right-[-10%] w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-blue-600/20 dark:bg-blue-600/10 blur-[100px] md:blur-[150px] mix-blend-multiply dark:mix-blend-lighten blob-shape"></div>        
-        <div class="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-purple-600/20 dark:bg-purple-600/10 blur-[100px] md:blur-[150px] mix-blend-multiply dark:mix-blend-lighten blob-shape" style="animation-delay: -5s; animation-duration: 20s;"></div>
+    <section id="home" class="min-h-screen flex items-center pt-24 pb-12 px-4 md:px-6 relative overflow-hidden">
+        <!-- Space Blue Cosmic Nebulas -->
+        <div class="absolute top-[-10%] right-[-10%] w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-primary/20 dark:bg-primary/30 blob-shape nebula-pulse mix-blend-multiply dark:mix-blend-screen z-[-1]"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-accent/20 dark:bg-accent/30 blob-shape nebula-pulse mix-blend-multiply dark:mix-blend-screen z-[-1]" style="animation-delay: -5s; animation-duration: 20s;"></div>
 
-        <div class="container mx-auto grid lg:grid-cols-2 gap-10 md:gap-12 items-center relative z-10">            
-            <div data-aos="fade-up" data-aos-duration="1200" class="text-center lg:text-left mt-10 lg:mt-0">                
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-tight mb-4 text-slate-900 dark:text-white drop-shadow-sm text-balance">                    
-                    Hi, I'm <br class="hidden sm:block">                    
-                    <span class="text-shine">Gowtham M</span>                
-                </h1>                
-                <p class="text-lg sm:text-xl lg:text-2xl text-slate-600 dark:text-slate-300 mb-8 font-medium">                    
-                    Specializing in <br class="sm:hidden"><span id="typewriter" class="text-blue-600 dark:text-blue-400 font-bold"></span><span class="cursor-blink h-5 sm:h-6 lg:h-8"></span>                
-                </p>                                
+        <div class="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 md:gap-16 relative z-10">
+            
+            <div data-aos="fade-up" data-aos-duration="1200" class="hero-col-left order-2 lg:order-1 flex-1 flex flex-col items-center lg:items-start text-center lg:text-left w-full mt-4 lg:mt-0">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-3 text-slate-900 dark:text-white tracking-tight w-full text-center lg:text-left">
+                    Hey I'm <br class="hidden sm:block lg:hidden">
+                    <span class="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text uppercase">Gowtham M</span>
+                </h1>
+                <p class="text-lg sm:text-2xl lg:text-3xl text-slate-700 dark:text-slate-200 mb-8 font-medium w-full text-center lg:text-left">
+                    I'm a <span id="typewriter" class="text-secondary font-bold"></span><span class="cursor-blink h-5 sm:h-8 bg-secondary"></span>
+                </p>
                 
-                <div class="flex items-center justify-center lg:justify-start gap-5 sm:gap-6 mb-10 text-xl sm:text-2xl text-slate-500 dark:text-slate-400">                    
-                    <a href="https://github.com/Gowtham9443" target="_blank" class="hover:text-blue-600 dark:hover:text-white hover:scale-125 transition-transform duration-300"><i class="fab fa-github"></i></a>                    
-                    <a href="https://www.linkedin.com/in/gowtham-m-96aa162a0" target="_blank" class="hover:text-blue-600 hover:scale-125 transition-transform duration-300"><i class="fab fa-linkedin-in"></i></a>                    
-                    <a href="https://x.com/jaddumad" target="_blank" class="hover:text-blue-500 hover:scale-125 transition-transform duration-300"><i class="fab fa-x-twitter"></i></a>                    
-                    <a href="https://www.instagram.com/gowtham_h_official/" target="_blank" class="hover:text-pink-500 hover:scale-125 transition-transform duration-300"><i class="fab fa-instagram"></i></a>                    
-                    <a href="https://www.facebook.com/people/Gowtham-Raj/pfbid0216AYBKMDEXUnQN2TVZFgxiFgHdSnFwdzj6FihCxTZwDVBcrXAjJeGGf1yuKXBizFl/" target="_blank" class="hover:text-blue-600 hover:scale-125 transition-transform duration-300"><i class="fab fa-facebook-f"></i></a>                
+                <div class="hidden lg:flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-10 text-lg w-full">
+                    <a href="https://github.com/Gowtham9443" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/gowtham-m-96aa162a0" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/jaddumad" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/gowtham_h_official/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/people/Gowtham-Raj/pfbid0216AYBKMDEXUnQN2TVZFgxiFgHdSnFwdzj6FihCxTZwDVBcrXAjJeGGf1yuKXBizFl/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-facebook-f"></i></a>
                 </div>
 
-                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">                    
-                    <a href="https://drive.google.com/file/d/1akuOYQNnDH8KUeaDByzWvIaESWCK4Vuk/view?usp=drivesdk" target="_blank" class="px-8 py-4 sm:px-10 sm:py-5 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold shadow-lg shadow-blue-500/30 transition-all text-center flex items-center justify-center group transform hover:-translate-y-1">                        
-                        Download CV <i class="fas fa-file-download ml-3 group-hover:translate-y-1 transition-transform"></i>                    
-                    </a>                    
-                    <a href="#contact" class="px-8 py-4 sm:px-10 sm:py-5 border-2 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-2xl font-bold transition-all text-center transform hover:-translate-y-1 text-slate-900 dark:text-white">Let's Talk</a>                
-                </div>            
-            </div>                        
-            
-            <div class="flex justify-center lg:justify-end order-first lg:order-last" data-aos="zoom-in" data-aos-duration="1500">                
-                <div class="relative group hero-img-wrap w-64 sm:w-72 md:w-80 lg:w-[400px] aspect-[4/5] mx-auto lg:mx-0">                    
-                    <!-- NEW Rotating Aura Animation -->                    
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 rounded-[2rem] sm:rounded-[2.5rem] blur-xl sm:blur-2xl opacity-60 aura-animate"></div>                    
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-[2rem] sm:rounded-[2.5rem] opacity-80 aura-animate shadow-xl"></div>
-                    <div class="absolute inset-0 bg-gradient-to-tr from-pink-500 to-blue-500 rounded-[2rem] sm:rounded-[2.5rem] opacity-80 aura-animate-reverse shadow-xl"></div>
-                    
-                    <!-- Full Image Display Link & Portrait Ratio -->
-                    <a href="https://gowtham2025.neocities.org/IMAG/gowtham%20m.jpg" target="_blank" class="absolute inset-0 z-10 block cursor-pointer" title="Click to view full image">
-                        <img src="https://gowtham2025.neocities.org/IMAG/gowtham%20m.jpg" alt="Gowtham" class="w-full h-full object-cover object-top rounded-[2rem] sm:rounded-[2.5rem] border-[3px] sm:border-4 border-white dark:border-slate-800 shadow-2xl transition-all duration-500 group-hover:scale-[1.03]">                    
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full">
+                    <a href="#contact" class="px-8 py-3.5 md:py-4 bg-gradient-to-r from-primary to-secondary text-white rounded-full font-bold shadow-glow-secondary hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(59,130,246,0.5)] transition-all duration-300 text-center flex items-center justify-center w-full sm:w-auto">
+                        Let's Talk
                     </a>
-                </div>            
-            </div>        
+                    <a href="https://drive.google.com/file/d/1akuOYQNnDH8KUeaDByzWvIaESWCK4Vuk/view?usp=drivesdk" target="_blank" class="relative inline-flex items-center justify-center px-8 py-3.5 md:py-4 font-bold text-secondary transition-all duration-300 rounded-full group hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto">
+                        <span class="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary p-[2px] transition-transform duration-300 group-hover:scale-[1.02]">
+                            <span class="flex w-full h-full bg-slate-50 dark:bg-[#040b16] rounded-full group-hover:bg-secondary/5 transition-colors duration-300"></span>
+                        </span>
+                        <span class="relative z-10 flex items-center gap-2 group-hover:text-primary transition-colors">Download CV</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-col-right order-1 lg:order-2 flex-1 flex flex-col items-center justify-center w-full" data-aos="zoom-in" data-aos-duration="1500">
+                <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-[400px] lg:h-[400px] mx-auto transition-all duration-700 animate-float-img">
+                    <a href="https://gowtham2025.neocities.org/IMAG/gowtham%20m.png" target="_blank" class="block w-full h-full relative z-10 p-[2px] bg-gradient-to-br from-primary/40 to-secondary/40 dark:from-white/10 dark:to-white/5 rounded-[2.5rem] overflow-hidden cursor-pointer">
+                        <div class="w-full h-full bg-slate-100 dark:bg-[#111] rounded-[2.4rem] overflow-hidden">
+                            <img src="https://gowtham2025.neocities.org/IMAG/gowtham%20m.png" alt="Gowtham" class="w-full h-full object-cover object-top opacity-95 hover:opacity-100 hover:scale-110 transition-all duration-700 ease-in-out">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex lg:hidden flex-wrap items-center justify-center gap-4 mt-6 text-lg w-full" data-aos="fade-up" data-aos-delay="200">
+                    <a href="https://github.com/Gowtham9443" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/gowtham-m-96aa162a0" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/jaddumad" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/gowtham_h_official/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/people/Gowtham-Raj/pfbid0216AYBKMDEXUnQN2TVZFgxiFgHdSnFwdzj6FihCxTZwDVBcrXAjJeGGf1yuKXBizFl/" target="_blank" class="w-12 h-12 flex items-center justify-center rounded-full bg-slate-200/60 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white transition-all shadow-sm transform hover:scale-110"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
         </div>
 
-        <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity cursor-pointer hidden sm:flex" onclick="document.getElementById('about').scrollIntoView()">            
-            <span class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-900 dark:text-white">Scroll Down</span>            
-            <div class="mouse"><div class="wheel"></div></div>        
-        </div>    
+        <div class="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition-opacity cursor-pointer hidden sm:flex" onclick="document.getElementById('about').scrollIntoView()">
+            <span class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-slate-900 dark:text-white drop-shadow-md">Scroll Down</span>
+            <div class="mouse backdrop-blur-md bg-white/10 dark:bg-black/20"><div class="wheel bg-primary shadow-[0_0_5px_currentColor]"></div></div>
+        </div>
     </section>
 
-    <section id="about" class="py-16 md:py-24 px-4 md:px-6 section-alt">        
-        <div class="container mx-auto max-w-5xl text-center">            
-            <div data-aos="fade-up" data-aos-duration="1000">                
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">About Me</h2>                
-                <p class="text-base md:text-lg text-blue-600 dark:text-blue-400 font-medium mb-6 px-4">A narrative of my professional evolution and core mission.</p>                
-                <div class="w-20 md:w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-10 md:mb-12 shadow-lg shadow-blue-500/50"></div>                                
+    <section id="about" class="py-16 md:py-24 px-4 md:px-6 relative">
+        <div class="container mx-auto max-w-5xl text-center relative z-10">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 uppercase tracking-tight color-cycle-text w-fit mx-auto">About Me</h2>
+                <p class="text-base md:text-lg text-primary dark:text-primaryLight font-medium mb-6 px-4">A narrative of my professional evolution and core mission.</p>
+                <div class="w-20 md:w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-10 md:mb-12 shadow-[0_0_15px_currentColor]"></div>
                 
-                <div class="grid lg:grid-cols-1 gap-8 md:gap-12 mb-12 md:mb-16">                    
-                    <div class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-xl md:shadow-2xl shadow-blue-500/5 border border-slate-200/50 dark:border-slate-700/50 relative overflow-hidden group text-left sm:text-center transition-transform hover:-translate-y-2 duration-500">                        
-                        <div class="absolute top-0 right-0 p-4 md:p-6 opacity-5 dark:opacity-10 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-700">                            
-                            <i class="fas fa-rocket text-7xl md:text-8xl text-blue-600"></i>                        
-                        </div>                        
-                        <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-slate-800 dark:text-slate-100">Professional Journey</h3>                        
-                        <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl mx-auto relative z-10 text-balance">                            
-                            I'm a dedicated developer with a strong foundation in building responsive, high-performance web applications. My expertise spans <span class="text-blue-600 dark:text-blue-400 font-semibold underline decoration-blue-600/30 hover:decoration-blue-600 transition-all cursor-default">HTML, CSS, JavaScript, and Java</span>, enabling me to tackle challenges across the full development stack. I am passionate about crafting seamless user experiences and writing clean, maintainable code using <span class="text-indigo-600 dark:text-indigo-400 italic">Agile methodologies</span>.                        
-                        </p>                    
-                    </div>                
+                <div class="grid lg:grid-cols-1 gap-8 md:gap-12 mb-12 md:mb-16">
+                    <div class="bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-xl md:shadow-2xl border border-slate-200/50 dark:border-slate-700/50 relative overflow-hidden group transition-transform hover:-translate-y-2 duration-500">
+                        <div class="absolute top-0 right-0 p-4 md:p-6 opacity-5 dark:opacity-20 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-700 z-0">
+                            <i class="fas fa-rocket text-7xl md:text-8xl text-primary drop-shadow-[0_0_20px_currentColor]"></i>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-slate-800 dark:text-white relative z-10 text-center">Professional Journey</h3>
+                        <!-- Adjusted text to be smaller, justified on mobile, centered on desktop -->
+                        <p class="text-sm md:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-4xl mx-auto relative z-10 text-justify md:text-center">
+                            I'm a dedicated developer with a strong foundation in building responsive, high-performance web applications. My expertise spans <span class="text-primary dark:text-primaryLight font-semibold border-b border-dashed border-currentColor hover:text-secondary dark:hover:text-secondary transition-all cursor-default">HTML, CSS, JavaScript, and Java</span>, enabling me to tackle challenges across the full development stack. I am passionate about crafting seamless user experiences and writing clean, maintainable code using <span class="text-accent italic font-medium">Agile methodologies</span>.
+                        </p>
+                    </div>
                 </div>
 
-                <div class="grid sm:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16 max-w-3xl mx-auto px-2">                    
-                    <div class="p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-blue-600 to-blue-800 text-white shadow-xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 cursor-default" data-aos="zoom-in-right">                        
-                        <p class="text-4xl md:text-5xl font-black mb-1 md:mb-2 drop-shadow-md">1+</p>                        
-                        <p class="text-xs md:text-sm font-bold uppercase tracking-widest opacity-90">Years of Growth</p>                    
-                    </div>                    
-                    <div class="p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-indigo-600 to-purple-800 text-white shadow-xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 cursor-default" data-aos="zoom-in-left">                        
-                        <p class="text-4xl md:text-5xl font-black mb-1 md:mb-2 drop-shadow-md">10+</p>                        
-                        <p class="text-xs md:text-sm font-bold uppercase tracking-widest opacity-90">Projects Shipped</p>                    
-                    </div>                
-                </div>                                
+                <div class="grid sm:grid-cols-2 gap-6 md:gap-8 mb-12 md:mb-16 max-w-3xl mx-auto px-2 text-center">
+                    <div class="p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-primary to-secondary border border-primary/20 text-white shadow-xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 cursor-default relative overflow-hidden" data-aos="zoom-in-right">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 pointer-events-none mix-blend-screen"></div>
+                        <p class="text-4xl md:text-5xl font-black mb-1 md:mb-2 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] relative z-10">1+</p>
+                        <p class="text-xs md:text-sm font-bold uppercase tracking-widest opacity-90 relative z-10">Years of Growth</p>
+                    </div>
+                    <div class="p-6 md:p-8 rounded-[2rem] bg-gradient-to-br from-secondary to-accent border border-secondary/20 text-white shadow-xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300 cursor-default relative overflow-hidden" data-aos="zoom-in-left">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-30 pointer-events-none mix-blend-screen"></div>
+                        <p class="text-4xl md:text-5xl font-black mb-1 md:mb-2 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] relative z-10">10+</p>
+                        <p class="text-xs md:text-sm font-bold uppercase tracking-widest opacity-90 relative z-10">Projects Shipped</p>
+                    </div>
+                </div>
                 
-                <div class="grid sm:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">                    
-                    <div class="edu-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm" data-aos="fade-up" data-aos-delay="100">                        
+                <div class="grid sm:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-12">
+                    <div class="edu-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm group text-center" data-aos="fade-up" data-aos-delay="100">
                         <div class="shine-layer"></div>
-                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 mx-auto mb-3 md:mb-4 text-lg md:text-xl transform transition-transform group-hover:scale-110">                            
-                            <i class="fas fa-graduation-cap"></i>                        
-                        </div>                        
-                        <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tighter mb-1 relative z-10">Degree</p>                        
-                        <p class="font-semibold text-xs md:text-sm text-slate-800 dark:text-slate-200 relative z-10">Master of Computer Applications</p>                    
-                    </div>                    
-                    <div class="edu-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm" data-aos="fade-up" data-aos-delay="200">                        
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-3 md:mb-4 text-lg md:text-xl transform transition-transform group-hover:scale-110 shadow-[0_0_15px_rgba(14,165,233,0.2)]">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tighter mb-1 relative z-10">Degree</p>
+                        <p class="font-semibold text-xs md:text-sm text-slate-800 dark:text-slate-200 relative z-10">Master of Computer Applications</p>
+                    </div>
+                    <div class="edu-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm group text-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="shine-layer"></div>
-                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 mx-auto mb-3 md:mb-4 text-lg md:text-xl">                            
-                            <i class="fas fa-map-marker-alt"></i>                        
-                        </div>                        
-                        <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tighter mb-1 relative z-10">Location</p>                        
-                        <p class="font-semibold text-xs md:text-sm text-slate-800 dark:text-slate-200 relative z-10">Erode, India</p>                    
-                    </div>                    
-                    <div class="edu-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm" data-aos="fade-up" data-aos-delay="300">                        
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mx-auto mb-3 md:mb-4 text-lg md:text-xl transform transition-transform group-hover:scale-110 shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tighter mb-1 relative z-10">Location</p>
+                        <p class="font-semibold text-xs md:text-sm text-slate-800 dark:text-slate-200 relative z-10">Erode, India</p>
+                    </div>
+                    <div class="edu-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm group text-center" data-aos="fade-up" data-aos-delay="300">
                         <div class="shine-layer"></div>
-                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 mx-auto mb-3 md:mb-4 text-lg md:text-xl">                            
-                            <i class="fas fa-envelope"></i>                        
-                        </div>                        
-                        <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tighter mb-1 relative z-10">Inquiry</p>                        
-                        <p class="font-semibold text-xs md:text-sm text-slate-800 dark:text-slate-200 relative z-10 break-all px-2">gowthamjaddu86@gmail.com</p>                    
-                    </div>                
-                </div>                                
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mx-auto mb-3 md:mb-4 text-lg md:text-xl transform transition-transform group-hover:scale-110 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 uppercase font-bold tracking-tighter mb-1 relative z-10">Inquiry</p>
+                        <p class="font-semibold text-xs md:text-sm text-slate-800 dark:text-slate-200 relative z-10 break-all px-2">gowthamjaddu86@gmail.com</p>
+                    </div>
+                </div>
                 
-                <div class="flex justify-center gap-4 mt-8">                    
-                    <a href="https://drive.google.com/file/d/1akuOYQNnDH8KUeaDByzWvIaESWCK4Vuk/view?usp=drivesdk" target="_blank" class="px-8 py-3 md:px-10 md:py-4 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-xl flex items-center group text-sm md:text-base">                        
-                        View Resume <i class="fas fa-external-link-alt ml-2 text-xs opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>                    
-                    </a>                
-                </div>            
-            </div>        
-        </div>    
+                <div class="flex justify-center gap-4 mt-8 w-full">
+                    <a href="https://drive.google.com/file/d/1akuOYQNnDH8KUeaDByzWvIaESWCK4Vuk/view?usp=drivesdk" target="_blank" class="px-8 py-3.5 md:px-10 md:py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] flex items-center justify-center group text-sm md:text-base w-full sm:w-auto">
+                        View Resume <i class="fas fa-external-link-alt ml-2 text-xs opacity-70 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="education" class="py-16 md:py-24 px-4 md:px-6 relative overflow-hidden">        
-        <div class="container mx-auto max-w-5xl">            
-            <div class="text-center mb-12 md:mb-20" data-aos="fade-up">                
-                <h2 class="text-3xl md:text-4xl font-black mb-3 md:mb-4 uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Education</h2>                
-                <p class="text-blue-600 dark:text-blue-400 font-semibold tracking-[0.15em] md:tracking-[0.2em] uppercase text-[10px] md:text-xs">My Academic Timeline</p>                
-                <div class="w-16 md:w-20 h-1.5 bg-blue-600 mx-auto rounded-full mt-4 md:mt-6 shadow-lg shadow-blue-500/50"></div>            
-            </div>                        
-            
-            <div class="relative max-w-4xl mx-auto">                
-                <!-- Timeline Line: Left on mobile, Center on desktop -->
-                <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-700 md:-translate-x-1/2"></div>
+    <section id="education" class="py-16 md:py-24 px-4 md:px-6 relative overflow-hidden">
+        <div class="absolute top-1/2 left-0 -translate-y-1/2 w-[400px] h-[400px] bg-primary/10 dark:bg-primary/20 blur-[120px] rounded-full pointer-events-none z-[-1] mix-blend-screen"></div>
 
-                <div class="space-y-12 md:space-y-16">                    
-                    <!-- PG Item -->                    
-                    <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center group" data-aos="fade-up">                        
-                        <!-- Desktop Date (Hidden on mobile) -->
-                        <div class="md:w-[45%] text-right hidden md:block pr-12 transition-transform duration-500 group-hover:-translate-x-2">                            
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400 font-black text-4xl opacity-40">2025</span>                            
-                            <p class="text-slate-400 font-bold uppercase tracking-widest text-xs mt-1">Expected Completion</p>                        
-                        </div>                                                
+        <div class="container mx-auto max-w-5xl relative z-10">
+            <div class="text-center mb-12 md:mb-20" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-black mb-3 md:mb-4 uppercase tracking-tight color-cycle-text w-fit mx-auto">Education</h2>
+                <p class="text-primary dark:text-primaryLight font-semibold tracking-[0.15em] md:tracking-[0.2em] uppercase text-[10px] md:text-xs">My Academic Timeline</p>
+                <div class="w-16 md:w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mt-4 md:mt-6 shadow-[0_0_15px_currentColor]"></div>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary via-secondary to-transparent dark:from-primaryLight dark:via-accent md:-translate-x-1/2 shadow-[0_0_10px_rgba(14,165,233,0.5)]"></div>
+
+                <div class="space-y-12 md:space-y-16">
+                    <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center group" data-aos="fade-up">
+                        <div class="md:w-[45%] text-right hidden md:block pr-12 transition-transform duration-500 group-hover:-translate-x-2">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary font-black text-4xl opacity-50 dark:opacity-80 drop-shadow-md">2025</span>
+                            <p class="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest text-xs mt-1">Expected Completion</p>
+                        </div>
                         
-                        <!-- Timeline Icon: Left on mobile, Center on desktop -->
-                        <div class="absolute left-6 md:left-1/2 w-8 h-8 md:w-10 md:h-10 bg-white dark:bg-slate-900 border-4 border-blue-600 rounded-full -translate-x-1/2 z-10 flex items-center justify-center shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all group-hover:scale-125 group-hover:bg-blue-600 duration-500 mt-6 md:mt-0">                             
-                            <i class="fas fa-university text-blue-600 group-hover:text-white transition-colors text-[10px] md:text-xs"></i>                        
+                        <div class="absolute left-6 md:left-1/2 w-8 h-8 md:w-10 md:h-10 bg-white dark:bg-slate-900 border-2 border-primary dark:border-primaryLight rounded-full -translate-x-1/2 z-10 flex items-center justify-center shadow-[0_0_20px_rgba(14,165,233,0.6)] transition-all group-hover:scale-125 group-hover:bg-primary dark:group-hover:bg-primaryLight duration-500 mt-6 md:mt-0 backdrop-blur-md">
+                            <i class="fas fa-university text-primary dark:text-primaryLight group-hover:text-white dark:group-hover:text-slate-900 transition-colors text-[10px] md:text-xs"></i>
                         </div>
 
-                        <!-- Card Content -->
-                        <div class="edu-card p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] w-[calc(100%-3rem)] md:w-[45%] ml-[3rem] md:ml-0 relative">                            
+                        <div class="edu-card p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] w-[calc(100%-3rem)] md:w-[45%] ml-[3rem] md:ml-0 relative backdrop-blur-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-700/50 text-left">
                             <div class="shine-layer"></div>
-                            
-                            <!-- Mobile Date (Hidden on desktop) -->
-                            <div class="md:hidden mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
-                                <span class="text-blue-600 dark:text-blue-400 font-black text-xl">2025</span>
+                            <div class="md:hidden mb-4 border-b border-slate-200 dark:border-slate-800 pb-3">
+                                <span class="text-primary dark:text-primaryLight font-black text-xl drop-shadow-sm">2025</span>
                                 <p class="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider text-[9px]">Expected Completion</p>
                             </div>
 
-                            <div class="flex flex-wrap gap-2 justify-between items-center mb-4 relative z-10">                                
-                                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-[9px] md:text-[10px] font-bold tracking-widest uppercase shadow-md">Post Graduation</span>                                
-                                <span class="text-blue-600 font-black bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-lg text-xs md:text-sm">7.9 CGPA</span>                            
-                            </div>                            
-                            <h3 class="text-xl md:text-2xl font-bold mb-1 md:mb-2 text-slate-800 dark:text-white relative z-10 text-balance">Master of Computer Applications</h3>                            
-                            <p class="text-blue-600 dark:text-blue-400 font-semibold mb-3 md:mb-4 text-xs md:text-sm relative z-10">Nandha Engineering College, Erode</p>                            
-                            <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed relative z-10">Specializing in advanced software paradigms, cloud architecture, and data analytics.</p>                            
-                            <div class="mt-5 md:mt-6 flex gap-2 relative z-10">                                
-                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[9px] md:text-[10px] rounded-lg font-bold border border-slate-200 dark:border-slate-700">2023 - 2025</span>                            
-                            </div>                        
-                        </div>                    
+                            <div class="flex flex-wrap gap-2 justify-between items-center mb-4 relative z-10">
+                                <span class="bg-gradient-to-r from-primary to-secondary text-white px-3 py-1 rounded-full text-[9px] md:text-[10px] font-bold tracking-widest uppercase shadow-md shadow-primary/30">Post Graduation</span>
+                                <span class="text-primary dark:text-primaryLight font-black bg-primary/10 px-2 py-1 rounded-lg text-xs md:text-sm border border-primary/20">7.9 CGPA</span>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold mb-1 md:mb-2 text-slate-800 dark:text-white relative z-10 text-balance">Master of Computer Applications</h3>
+                            <p class="text-primary dark:text-primaryLight font-semibold mb-3 md:mb-4 text-xs md:text-sm relative z-10">Nandha Engineering College, Erode</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-xs md:text-sm leading-relaxed relative z-10">Specializing in advanced software paradigms, cloud architecture, and data analytics.</p>
+                            <div class="mt-5 md:mt-6 flex gap-2 relative z-10">
+                                <span class="px-3 py-1 bg-slate-100/80 dark:bg-slate-800/80 backdrop-blur-sm text-slate-600 dark:text-slate-400 text-[9px] md:text-[10px] rounded-lg font-bold border border-slate-200 dark:border-slate-700">2023 - 2025</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- UG Item -->                    
-                    <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center group" data-aos="fade-up" data-aos-delay="100">                        
-                        
-                        <!-- Card Content -->
-                        <div class="edu-card p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] w-[calc(100%-3rem)] md:w-[45%] ml-[3rem] md:ml-0 md:order-1 relative">                            
+                    <div class="relative flex flex-col md:flex-row md:justify-between items-start md:items-center group" data-aos="fade-up" data-aos-delay="100">
+                        <div class="edu-card p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] w-[calc(100%-3rem)] md:w-[45%] ml-[3rem] md:ml-0 md:order-1 relative backdrop-blur-xl bg-white/70 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-700/50 text-left">
                             <div class="shine-layer"></div>
-                            
-                            <!-- Mobile Date (Hidden on desktop) -->
-                            <div class="md:hidden mb-4 border-b border-slate-100 dark:border-slate-800 pb-3">
-                                <span class="text-indigo-600 dark:text-indigo-400 font-black text-xl">2023</span>
+                            <div class="md:hidden mb-4 border-b border-slate-200 dark:border-slate-800 pb-3">
+                                <span class="text-secondary dark:text-secondary font-black text-xl drop-shadow-sm">2023</span>
                                 <p class="text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider text-[9px]">Passed Out</p>
                             </div>
 
-                            <div class="flex flex-wrap gap-2 justify-between items-center mb-4 relative z-10">                                
-                                <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-[9px] md:text-[10px] font-bold tracking-widest uppercase shadow-md">Under Graduation</span>                                
-                                <span class="text-indigo-600 font-black bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-lg text-xs md:text-sm">7.1 CGPA</span>                            
-                            </div>                            
-                            <h3 class="text-xl md:text-2xl font-bold mb-1 md:mb-2 text-slate-800 dark:text-white relative z-10 text-balance">B.Sc Computer Science</h3>                            
-                            <p class="text-indigo-600 dark:text-indigo-400 font-semibold mb-3 md:mb-4 text-xs md:text-sm relative z-10">Erode Arts and Science College</p>                            
-                            <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed relative z-10">Foundation in computational logic, database management, and web fundamentals.</p>                            
-                            <div class="mt-5 md:mt-6 flex gap-2 relative z-10">                                
-                                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[9px] md:text-[10px] rounded-lg font-bold border border-slate-200 dark:border-slate-700">2020 - 2023</span>                            
-                            </div>                        
+                            <div class="flex flex-wrap gap-2 justify-between items-center mb-4 relative z-10">
+                                <span class="bg-gradient-to-r from-secondary to-accent text-white px-3 py-1 rounded-full text-[9px] md:text-[10px] font-bold tracking-widest uppercase shadow-md shadow-secondary/30">Under Graduation</span>
+                                <span class="text-secondary dark:text-secondary font-black bg-secondary/10 px-2 py-1 rounded-lg text-xs md:text-sm border border-secondary/20">7.1 CGPA</span>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold mb-1 md:mb-2 text-slate-800 dark:text-white relative z-10 text-balance">B.Sc Computer Science</h3>
+                            <p class="text-secondary dark:text-secondary font-semibold mb-3 md:mb-4 text-xs md:text-sm relative z-10">Erode Arts and Science College</p>
+                            <p class="text-slate-600 dark:text-slate-300 text-xs md:text-sm leading-relaxed relative z-10">Foundation in computational logic, database management, and web fundamentals.</p>
+                            <div class="mt-5 md:mt-6 flex gap-2 relative z-10">
+                                <span class="px-3 py-1 bg-slate-100/80 dark:bg-slate-800/80 backdrop-blur-sm text-slate-600 dark:text-slate-400 text-[9px] md:text-[10px] rounded-lg font-bold border border-slate-200 dark:border-slate-700">2020 - 2023</span>
+                            </div>
                         </div>
 
-                        <!-- Timeline Icon: Left on mobile, Center on desktop -->
-                        <div class="absolute left-6 md:left-1/2 w-8 h-8 md:w-10 md:h-10 bg-white dark:bg-slate-900 border-4 border-indigo-600 rounded-full -translate-x-1/2 z-10 flex items-center justify-center shadow-[0_0_15px_rgba(79,70,229,0.4)] transition-all group-hover:scale-125 group-hover:bg-indigo-600 duration-500 mt-6 md:mt-0">                             
-                            <i class="fas fa-graduation-cap text-indigo-600 group-hover:text-white transition-colors text-[10px] md:text-xs"></i>                        
+                        <div class="absolute left-6 md:left-1/2 w-8 h-8 md:w-10 md:h-10 bg-white dark:bg-slate-900 border-2 border-secondary dark:border-secondary rounded-full -translate-x-1/2 z-10 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.6)] transition-all group-hover:scale-125 group-hover:bg-secondary dark:group-hover:bg-secondary duration-500 mt-6 md:mt-0 backdrop-blur-md">
+                            <i class="fas fa-graduation-cap text-secondary dark:text-secondary group-hover:text-white dark:group-hover:text-slate-900 transition-colors text-[10px] md:text-xs"></i>
                         </div>
 
-                        <!-- Desktop Date (Hidden on mobile) -->
-                        <div class="md:w-[45%] text-left hidden md:block pl-12 md:order-2 transition-transform duration-500 group-hover:translate-x-2">                            
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-indigo-400 font-black text-4xl opacity-40">2023</span>                            
-                            <p class="text-slate-400 font-bold uppercase tracking-widest text-xs mt-1">Passed Out</p>                        
-                        </div>                    
-                    </div>                
-                </div>            
-            </div>        
-        </div>    
-    </section>
-
-    <section id="skills" class="py-16 md:py-24 px-4 md:px-6 section-alt">        
-        <div class="container mx-auto text-center">            
-            <div class="mb-12 md:mb-16" data-aos="fade-up">                
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-3 md:mb-4 uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Skills</h2>                
-                <div class="w-16 md:w-20 h-1.5 bg-blue-600 mx-auto rounded-full shadow-lg shadow-blue-500/50"></div>            
-            </div>            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6 max-w-5xl mx-auto">                
-                <div class="skill-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm flex flex-col justify-between group" data-aos="zoom-in" data-aos-delay="100">                    
-                    <div class="shine-layer"></div>
-                    <div class="flex items-center space-x-4 mb-4 relative z-10">                        
-                        <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-orange-100 dark:bg-orange-900/30 text-orange-600 text-xl md:text-2xl group-hover:bg-orange-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(234,88,12,0.4)]">                            
-                            <i class="fab fa-html5"></i>                        
-                        </div>                        
-                        <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">HTML5</h3>                    
-                    </div>                    
-                    <div class="skill-item relative z-10">                        
-                        <div class="flex justify-between font-bold text-[10px] md:text-xs mb-2 text-slate-800 dark:text-slate-200"><span>Mastery</span><span>95%</span></div>                        
-                        <div class="h-2 rounded-full progress-bar-container overflow-hidden">                            
-                            <div class="h-full progress-bar-fill" data-width="95%"></div>                        
-                        </div>                    
-                    </div>                
-                </div>
-
-                <div class="skill-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm flex flex-col justify-between group" data-aos="zoom-in" data-aos-delay="150">                    
-                    <div class="shine-layer"></div>
-                    <div class="flex items-center space-x-4 mb-4 relative z-10">                        
-                        <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 text-xl md:text-2xl group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(37,99,235,0.4)]">                            
-                            <i class="fab fa-css3-alt"></i>                        
-                        </div>                        
-                        <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">CSS3</h3>                    
-                    </div>                    
-                    <div class="skill-item relative z-10">                        
-                        <div class="flex justify-between font-bold text-[10px] md:text-xs mb-2 text-slate-800 dark:text-slate-200"><span>Styling</span><span>90%</span></div>                        
-                        <div class="h-2 rounded-full progress-bar-container overflow-hidden">                            
-                            <div class="h-full progress-bar-fill" data-width="90%"></div>                        
-                        </div>                    
-                    </div>                
-                </div>
-
-                <div class="skill-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm flex flex-col justify-between group" data-aos="zoom-in" data-aos-delay="200">                    
-                    <div class="shine-layer"></div>
-                    <div class="flex items-center space-x-4 mb-4 relative z-10">                        
-                        <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 text-xl md:text-2xl group-hover:bg-yellow-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(202,138,4,0.4)]">                            
-                            <i class="fab fa-js"></i>                        
-                        </div>                        
-                        <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">JavaScript</h3>                    
-                    </div>                    
-                    <div class="skill-item relative z-10">                        
-                        <div class="flex justify-between font-bold text-[10px] md:text-xs mb-2 text-slate-800 dark:text-slate-200"><span>Logic</span><span>92%</span></div>                        
-                        <div class="h-2 rounded-full progress-bar-container overflow-hidden">                            
-                            <div class="h-full progress-bar-fill" data-width="92%"></div>                        
-                        </div>                    
-                    </div>                
-                </div>
-
-                <div class="skill-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm flex flex-col justify-between group" data-aos="zoom-in" data-aos-delay="250">                    
-                    <div class="shine-layer"></div>
-                    <div class="flex items-center space-x-4 mb-4 relative z-10">                        
-                        <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-red-100 dark:bg-red-900/30 text-red-600 text-xl md:text-2xl group-hover:bg-red-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(220,38,38,0.4)]">                            
-                            <i class="fab fa-java"></i>                        
-                        </div>                        
-                        <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">Java</h3>                    
-                    </div>                    
-                    <div class="skill-item relative z-10">                        
-                        <div class="flex justify-between font-bold text-[10px] md:text-xs mb-2 text-slate-800 dark:text-slate-200"><span>Backend</span><span>85%</span></div>                        
-                        <div class="h-2 rounded-full progress-bar-container overflow-hidden">                            
-                            <div class="h-full progress-bar-fill" data-width="85%"></div>                        
-                        </div>                    
-                    </div>                
-                </div>
-
-                <div class="skill-card p-5 md:p-6 rounded-[1.5rem] md:rounded-2xl shadow-sm flex flex-col justify-between group" data-aos="zoom-in" data-aos-delay="300">                    
-                    <div class="shine-layer"></div>
-                    <div class="flex items-center space-x-4 mb-4 relative z-10">                        
-                        <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl bg-teal-100 dark:bg-teal-900/30 text-teal-600 text-xl md:text-2xl group-hover:bg-teal-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_15px_rgba(13,148,136,0.4)]">                            
-                            <i class="fab fa-python"></i>                        
-                        </div>                        
-                        <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white">Python</h3>                    
-                    </div>                    
-                    <div class="skill-item relative z-10">                        
-                        <div class="flex justify-between font-bold text-[10px] md:text-xs mb-2 text-slate-800 dark:text-slate-200"><span>Scripting</span><span>80%</span></div>                        
-                        <div class="h-2 rounded-full progress-bar-container overflow-hidden">                            
-                            <div class="h-full progress-bar-fill" data-width="80%"></div>                        
-                        </div>                    
-                    </div>                
-                </div>            
-            </div>        
-        </div>    
-    </section>
-
-    <section id="portfolio" class="py-16 md:py-24 px-4 md:px-6">        
-        <div class="container mx-auto">            
-            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">                
-                <h2 class="text-3xl md:text-4xl font-black mb-3 md:mb-4 uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Projects</h2>                
-                <p class="text-blue-600 dark:text-blue-400 font-semibold tracking-[0.15em] md:tracking-[0.2em] uppercase text-[10px] md:text-xs text-center">My technical creations</p>                
-                <div class="w-20 md:w-24 h-1.5 bg-blue-600 mx-auto rounded-full mt-4 md:mt-6 shadow-lg shadow-blue-500/50"></div>            
-            </div>                        
-            
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">                
-                <!-- Project 1: Media Converter -->                
-                <div class="project-card group rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="100">                    
-                    <div class="project-glow"></div>                    
-                    <div class="shine-layer"></div>
-                    <div class="relative overflow-hidden aspect-[4/3] m-2 md:m-3 rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-blue-600/10 to-indigo-600/10 dark:from-blue-600/20 dark:to-indigo-600/20 flex items-center justify-center relative z-10">                        
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex flex-col justify-end p-6 md:p-8 backdrop-blur-[2px]">                            
-                            <div class="flex gap-3 md:gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">                                
-                                <a href="https://gowtham2025.neocities.org/WEB%20APP/Media%20Converter/Media%20kit" target="_blank" class="px-4 py-2 md:px-5 md:py-2.5 bg-blue-600 text-white rounded-full flex items-center gap-2 text-[10px] md:text-xs font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/50">                                    
-                                    <i class="fas fa-external-link-alt"></i> Live Demo                                
-                                </a>                                
-                                <a href="https://github.com/Gowtham9443" class="w-8 h-8 md:w-10 md:h-10 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-slate-200 transition-all shadow-lg hover:scale-110">                                    
-                                    <i class="fab fa-github"></i>                                
-                                </a>                            
-                            </div>                        
-                        </div>                        
-                        <div class="text-6xl md:text-7xl text-blue-600 dark:text-blue-400 opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 icon-float">                            
-                            <i class="fas fa-photo-video drop-shadow-md"></i>                        
-                        </div>                    
-                    </div>                    
-                    <div class="p-6 md:p-8 pt-4 md:pt-4 flex-grow flex flex-col relative z-10">                        
-                        <div class="flex gap-2 mb-3 md:mb-4 flex-wrap">                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-600 rounded-lg">Web App</span>                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 rounded-lg">Utilities</span>                        
-                        </div>                        
-                        <h4 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-slate-800 dark:text-white">Media Converter</h4>                        
-                        <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8">                            
-                            A versatile media conversion tool designed to seamlessly process and transform different media formats directly in the browser.                        
-                        </p>                        
-                        <div class="mt-auto pt-4 md:pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center group/footer">                            
-                            <span class="text-[9px] md:text-[10px] font-black text-blue-600 uppercase tracking-widest">Tool</span>                            
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 group-hover/footer:bg-blue-600 group-hover/footer:text-white transition-all shadow-sm">                                
-                                <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>                            
-                            </div>                        
-                        </div>                    
-                    </div>                
-                </div>
-
-                <!-- Project 2: Flappy Bird -->                
-                <div class="project-card group rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="200">                    
-                    <div class="project-glow"></div>                    
-                    <div class="shine-layer"></div>
-                    <div class="relative overflow-hidden aspect-[4/3] m-2 md:m-3 rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-green-600/10 to-yellow-500/10 dark:from-green-600/20 dark:to-yellow-500/20 flex items-center justify-center relative z-10">                        
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex flex-col justify-end p-6 md:p-8 backdrop-blur-[2px]">                            
-                            <div class="flex gap-3 md:gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">                                
-                                <a href="https://gowtham2025.neocities.org/WEB%20APP/flappy%20bird/flappy_bird_deluxe%20(1)" target="_blank" class="px-4 py-2 md:px-5 md:py-2.5 bg-green-600 text-white rounded-full flex items-center gap-2 text-[10px] md:text-xs font-bold hover:bg-green-700 transition-all shadow-lg hover:shadow-green-500/50">                                    
-                                    <i class="fas fa-external-link-alt"></i> Live Demo                                
-                                </a>                                
-                                <a href="https://github.com/Gowtham9443" class="w-8 h-8 md:w-10 md:h-10 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-slate-200 transition-all shadow-lg hover:scale-110">                                    
-                                    <i class="fab fa-github"></i>                                
-                                </a>                            
-                            </div>                        
-                        </div>                        
-                        <div class="text-6xl md:text-7xl text-green-600 dark:text-green-400 opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 icon-float" style="animation-delay: 0.5s;">                            
-                            <i class="fas fa-gamepad drop-shadow-md"></i>                        
-                        </div>                    
-                    </div>                    
-                    <div class="p-6 md:p-8 pt-4 md:pt-4 flex-grow flex flex-col relative z-10">                        
-                        <div class="flex gap-2 mb-3 md:mb-4 flex-wrap">                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-green-100 dark:bg-green-900/40 text-green-600 rounded-lg">Game Dev</span>                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-yellow-100 dark:bg-yellow-900/40 text-yellow-600 rounded-lg">Canvas API</span>                        
-                        </div>                        
-                        <h4 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-slate-800 dark:text-white">Flappy Bird Deluxe</h4>                        
-                        <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8">                            
-                            A fully interactive, web-based recreation of the classic hit game, featuring smooth canvas animations and engaging gameplay mechanics.                        
-                        </p>                        
-                        <div class="mt-auto pt-4 md:pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center group/footer">                            
-                            <span class="text-[9px] md:text-[10px] font-black text-green-600 uppercase tracking-widest">Web Game</span>                            
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-600 group-hover/footer:bg-green-600 group-hover/footer:text-white transition-all shadow-sm">                                
-                                <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>                            
-                            </div>                        
-                        </div>                    
-                    </div>                
-                </div>
-
-                <!-- Project 3: Image Editor Pro -->                
-                <div class="project-card group rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="300">                    
-                    <div class="project-glow"></div>                    
-                    <div class="shine-layer"></div>
-                    <div class="relative overflow-hidden aspect-[4/3] m-2 md:m-3 rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-pink-600/10 to-purple-600/10 dark:from-pink-600/20 dark:to-purple-600/20 flex items-center justify-center relative z-10">                        
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex flex-col justify-end p-6 md:p-8 backdrop-blur-[2px]">                            
-                            <div class="flex gap-3 md:gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">                                
-                                <a href="https://gowtham2025.neocities.org/project%20/Image%20Editor%20Pro/in" target="_blank" class="px-4 py-2 md:px-5 md:py-2.5 bg-pink-600 text-white rounded-full flex items-center gap-2 text-[10px] md:text-xs font-bold hover:bg-pink-700 transition-all shadow-lg hover:shadow-pink-500/50">                                    
-                                    <i class="fas fa-external-link-alt"></i> Live Demo                                
-                                </a>                                
-                                <a href="https://github.com/Gowtham9443" class="w-8 h-8 md:w-10 md:h-10 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-slate-200 transition-all shadow-lg hover:scale-110">                                    
-                                    <i class="fab fa-github"></i>                                
-                                </a>                            
-                            </div>                        
-                        </div>                        
-                        <div class="text-6xl md:text-7xl text-pink-600 dark:text-pink-400 opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 icon-float" style="animation-delay: 1s;">                            
-                            <i class="fas fa-sliders-h drop-shadow-md"></i>                        
-                        </div>                    
-                    </div>                    
-                    <div class="p-6 md:p-8 pt-4 md:pt-4 flex-grow flex flex-col relative z-10">                        
-                        <div class="flex gap-2 mb-3 md:mb-4 flex-wrap">                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-pink-100 dark:bg-pink-900/40 text-pink-600 rounded-lg">Editor</span>                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-purple-100 dark:bg-purple-900/40 text-purple-600 rounded-lg">JavaScript</span>                        
-                        </div>                        
-                        <h4 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-slate-800 dark:text-white">Image Editor Pro</h4>                        
-                        <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8">                            
-                            An advanced browser-based image manipulation suite providing powerful filters, cropping capabilities, and visual enhancements.                        
-                        </p>                        
-                        <div class="mt-auto pt-4 md:pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center group/footer">                            
-                            <span class="text-[9px] md:text-[10px] font-black text-pink-600 uppercase tracking-widest">Utility App</span>                            
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-pink-50 dark:bg-pink-900/20 flex items-center justify-center text-pink-600 group-hover/footer:bg-pink-600 group-hover/footer:text-white transition-all shadow-sm">                                
-                                <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>                            
-                            </div>                        
-                        </div>                    
-                    </div>                
-                </div>
-                
-                <!-- Project 4: TEXT TO FILES -->                
-                <div class="project-card group rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="400">                    
-                    <div class="project-glow"></div>                    
-                    <div class="shine-layer"></div>
-                    <div class="relative overflow-hidden aspect-[4/3] m-2 md:m-3 rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-teal-600/10 to-cyan-600/10 dark:from-teal-600/20 dark:to-cyan-600/20 flex items-center justify-center relative z-10">                        
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex flex-col justify-end p-6 md:p-8 backdrop-blur-[2px]">                            
-                            <div class="flex gap-3 md:gap-4 transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">                                
-                                <a href="https://gowtham2025.neocities.org/TEXT%20TO%20ALL%20FILES/in" target="_blank" class="px-4 py-2 md:px-5 md:py-2.5 bg-teal-600 text-white rounded-full flex items-center gap-2 text-[10px] md:text-xs font-bold hover:bg-teal-700 transition-all shadow-lg hover:shadow-teal-500/50">                                    
-                                    <i class="fas fa-external-link-alt"></i> Live Demo                                
-                                </a>                                
-                                <a href="https://github.com/Gowtham9443" class="w-8 h-8 md:w-10 md:h-10 bg-white text-slate-900 rounded-full flex items-center justify-center hover:bg-slate-200 transition-all shadow-lg hover:scale-110">                                    
-                                    <i class="fab fa-github"></i>                                
-                                </a>                            
-                            </div>                        
-                        </div>                        
-                        <div class="text-6xl md:text-7xl text-teal-600 dark:text-teal-400 opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-700 icon-float" style="animation-delay: 1.5s;">                            
-                            <i class="fas fa-file-code drop-shadow-md"></i>                        
-                        </div>                    
-                    </div>                    
-                    <div class="p-6 md:p-8 pt-4 md:pt-4 flex-grow flex flex-col relative z-10">                        
-                        <div class="flex gap-2 mb-3 md:mb-4 flex-wrap">                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-teal-100 dark:bg-teal-900/40 text-teal-600 rounded-lg">Node.js</span>                            
-                            <span class="text-[8px] md:text-[9px] font-black uppercase tracking-widest px-2.5 py-1 md:px-3 md:py-1 bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 rounded-lg">Scripts</span>                        
-                        </div>                        
-                        <h4 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 text-slate-800 dark:text-white">Text to Files Generator</h4>                        
-                        <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8">                            
-                            A fast, local development tool built to instantly convert text data into multiple structured file formats using simple commands.                        
-                        </p>                        
-                        <div class="mt-auto pt-4 md:pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center group/footer">                            
-                            <span class="text-[9px] md:text-[10px] font-black text-teal-600 uppercase tracking-widest">Dev Tool</span>                            
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-teal-600 group-hover/footer:bg-teal-600 group-hover/footer:text-white transition-all shadow-sm">                                
-                                <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>                            
-                            </div>                        
-                        </div>                    
-                    </div>                
+                        <div class="md:w-[45%] text-left hidden md:block pl-12 md:order-2 transition-transform duration-500 group-hover:translate-x-2">
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-accent font-black text-4xl opacity-50 dark:opacity-80 drop-shadow-md">2023</span>
+                            <p class="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest text-xs mt-1">Passed Out</p>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="skills" class="py-16 md:py-24 px-4 md:px-6 relative">
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <!-- Header matching the screenshot style (Left Aligned) -->
+            <div class="mb-10 md:mb-14 text-left" data-aos="fade-right">
+                <h2 class="text-3xl md:text-5xl font-black mb-3 text-slate-900 dark:text-white tracking-tight">Skills</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary to-primaryLight rounded-full mb-4"></div>
+                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm md:text-base">My technical capabilities and tools I'm proficient with.</p>
+            </div>
             
-            <div class="mt-16 md:mt-20 flex justify-center w-full relative z-20 px-4" data-aos="fade-up" data-aos-delay="100">
-                <a href="https://github.com/Gowtham9443?tab=repositories" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 md:px-10 md:py-5 bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 rounded-2xl font-bold hover:scale-105 transition-all duration-300 shadow-xl flex items-center justify-center group cursor-pointer border-2 border-transparent hover:border-blue-500">
-                    <i class="fab fa-github text-xl md:text-2xl mr-3 group-hover:rotate-[360deg] transition-transform duration-700"></i>
-                    <span class="text-sm md:text-lg tracking-wide">View More on GitHub</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+                <!-- HTML Card -->
+                <div class="bg-white dark:bg-[#111827] rounded-[1rem] p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-500/10 dark:hover:border-slate-700 group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-rose-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-rose-500/20">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">HTML</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Proficiency</span>
+                            <span class="text-slate-900 dark:text-white font-bold text-sm">85%</span>
+                        </div>
+                        <div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+                            <!-- Inlined background to override the CSS gradient -->
+                            <div class="h-full rounded-full progress-bar-fill transition-all duration-1000 ease-out absolute top-0 left-0" style="background: #f43f5e; width: 0%;" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CSS Card -->
+                <div class="bg-white dark:bg-[#111827] rounded-[1rem] p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10 dark:hover:border-slate-700 group" data-aos="fade-up" data-aos-delay="150">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/20">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">CSS</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Proficiency</span>
+                            <span class="text-slate-900 dark:text-white font-bold text-sm">75%</span>
+                        </div>
+                        <div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+                            <div class="h-full rounded-full progress-bar-fill transition-all duration-1000 ease-out absolute top-0 left-0" style="background: #3b82f6; width: 0%;" data-width="75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Java Card -->
+                <div class="bg-white dark:bg-[#111827] rounded-[1rem] p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-orange-500/10 dark:hover:border-slate-700 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-orange-500/20">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Java</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Proficiency</span>
+                            <span class="text-slate-900 dark:text-white font-bold text-sm">80%</span>
+                        </div>
+                        <div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+                            <div class="h-full rounded-full progress-bar-fill transition-all duration-1000 ease-out absolute top-0 left-0" style="background: #f97316; width: 0%;" data-width="80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JavaScript Card -->
+                <div class="bg-white dark:bg-[#111827] rounded-[1rem] p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-500/10 dark:hover:border-slate-700 group" data-aos="fade-up" data-aos-delay="250">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-yellow-500/20">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">JavaScript</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Proficiency</span>
+                            <span class="text-slate-900 dark:text-white font-bold text-sm">65%</span>
+                        </div>
+                        <div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+                            <div class="h-full rounded-full progress-bar-fill transition-all duration-1000 ease-out absolute top-0 left-0" style="background: #eab308; width: 0%;" data-width="65%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python Card -->
+                <div class="bg-white dark:bg-[#111827] rounded-[1rem] p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-500/10 dark:hover:border-slate-700 group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-green-500/20">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Python</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Proficiency</span>
+                            <span class="text-slate-900 dark:text-white font-bold text-sm">65%</span>
+                        </div>
+                        <div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+                            <div class="h-full rounded-full progress-bar-fill transition-all duration-1000 ease-out absolute top-0 left-0" style="background: #22c55e; width: 0%;" data-width="65%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- WordPress Card -->
+                <div class="bg-white dark:bg-[#111827] rounded-[1rem] p-6 border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/10 dark:hover:border-slate-700 group" data-aos="fade-up" data-aos-delay="350">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-sky-500/20">
+                            <i class="fab fa-wordpress"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">WordPress</h3>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 dark:text-slate-400 text-sm font-medium">Proficiency</span>
+                            <span class="text-slate-900 dark:text-white font-bold text-sm">85%</span>
+                        </div>
+                        <div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden relative">
+                            <div class="h-full rounded-full progress-bar-fill transition-all duration-1000 ease-out absolute top-0 left-0" style="background: #0ea5e9; width: 0%;" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-16 md:py-24 px-4 md:px-6 relative">
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-secondary/10 dark:bg-secondary/20 blur-[150px] rounded-full pointer-events-none mix-blend-screen z-[-1]"></div>
+
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <!-- Header matching the screenshot style (Left Aligned) -->
+            <div class="mb-8 md:mb-10 text-left" data-aos="fade-right">
+                <h2 class="text-3xl md:text-5xl font-black mb-3 text-slate-900 dark:text-white tracking-tight">Projects</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary to-primaryLight rounded-full mb-4"></div>
+                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm md:text-base">A selection of my professional work categorized by type.</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap items-center gap-3 mb-10 md:mb-12" id="project-filters" data-aos="fade-up">
+                <button data-filter="all" class="filter-btn active px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-primaryLight text-white font-bold text-sm shadow-[0_0_15px_rgba(14,165,233,0.4)] transition-all">All</button>
+                <button data-filter="web-app" class="filter-btn px-6 py-2.5 rounded-full bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Web App</button>
+                <button data-filter="game-dev" class="filter-btn px-6 py-2.5 rounded-full bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Game Dev</button>
+                <button data-filter="utility-app" class="filter-btn px-6 py-2.5 rounded-full bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Utility App</button>
+                <button data-filter="dev-tool" class="filter-btn px-6 py-2.5 rounded-full bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 font-semibold text-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">Dev Tool</button>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Project 1: Media Converter -->
+                <div class="project-item group bg-white dark:bg-[#111827] rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-6 md:p-7 flex flex-col transition-all duration-300 hover:border-primary/50 dark:hover:border-primary/50 hover:shadow-[0_0_30px_rgba(14,165,233,0.15)] relative overflow-hidden" data-category="web-app" data-aos="fade-up" data-aos-delay="100">
+                    
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500 flex items-center justify-center text-white text-xl shadow-lg shrink-0">
+                                <i class="fas fa-photo-video"></i>
+                            </div>
+                            <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white leading-tight">Media Converter</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-[9px] font-black tracking-widest uppercase border border-primary/20 whitespace-nowrap ml-2">Web App</span>
+                    </div>
+
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                        A versatile media conversion tool designed to seamlessly process and transform different media formats directly in the browser.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">HTML5</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">JavaScript</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">CSS3</span>
+                    </div>
+
+                    <div class="flex gap-3 mt-auto">
+                        <a href="https://gowtham2025.neocities.org/WEB%20APP/Media%20Converter/Media%20kit" target="_blank" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-primary to-primaryLight text-white text-center font-bold text-sm shadow-[0_0_15px_rgba(14,165,233,0.3)] hover:scale-[1.02] transition-transform">Demo</a>
+                        <a href="https://github.com/Gowtham9443" target="_blank" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-[#1f2937] text-slate-800 dark:text-white text-center font-bold text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Flappy Bird -->
+                <div class="project-item group bg-white dark:bg-[#111827] rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-6 md:p-7 flex flex-col transition-all duration-300 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] relative overflow-hidden" data-category="game-dev" data-aos="fade-up" data-aos-delay="200">
+                    
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center text-white text-xl shadow-lg shrink-0">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white leading-tight">Flappy Bird Deluxe</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-500 text-[9px] font-black tracking-widest uppercase border border-emerald-500/20 whitespace-nowrap ml-2">Web Game</span>
+                    </div>
+
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                        A fully interactive, web-based recreation of the classic hit game, featuring smooth canvas animations and engaging gameplay mechanics.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">Canvas API</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">JavaScript</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">HTML5</span>
+                    </div>
+
+                    <div class="flex gap-3 mt-auto">
+                        <a href="https://gowtham2025.neocities.org/WEB%20APP/flappy%20bird/flappy_bird_deluxe%20(1)" target="_blank" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 text-white text-center font-bold text-sm shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:scale-[1.02] transition-transform">Demo</a>
+                        <a href="https://github.com/Gowtham9443" target="_blank" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-[#1f2937] text-slate-800 dark:text-white text-center font-bold text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Image Editor Pro -->
+                <div class="project-item group bg-white dark:bg-[#111827] rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-6 md:p-7 flex flex-col transition-all duration-300 hover:border-pink-500/50 dark:hover:border-pink-500/50 hover:shadow-[0_0_30px_rgba(236,72,153,0.15)] relative overflow-hidden" data-category="utility-app" data-aos="fade-up" data-aos-delay="300">
+                    
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-rose-500 flex items-center justify-center text-white text-xl shadow-lg shrink-0">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white leading-tight">Image Editor Pro</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-md bg-pink-500/10 text-pink-500 text-[9px] font-black tracking-widest uppercase border border-pink-500/20 whitespace-nowrap ml-2">Utility App</span>
+                    </div>
+
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                        An advanced browser-based image manipulation suite providing powerful filters, cropping capabilities, and visual enhancements.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">Editor API</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">JavaScript</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">CSS3</span>
+                    </div>
+
+                    <div class="flex gap-3 mt-auto">
+                        <a href="https://gowtham2025.neocities.org/project%20/Image%20Editor%20Pro/in" target="_blank" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-400 text-white text-center font-bold text-sm shadow-[0_0_15px_rgba(236,72,153,0.3)] hover:scale-[1.02] transition-transform">Demo</a>
+                        <a href="https://github.com/Gowtham9443" target="_blank" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-[#1f2937] text-slate-800 dark:text-white text-center font-bold text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Code</a>
+                    </div>
+                </div>
+
+                <!-- Project 4: TEXT TO FILES -->
+                <div class="project-item group bg-white dark:bg-[#111827] rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-6 md:p-7 flex flex-col transition-all duration-300 hover:border-teal-500/50 dark:hover:border-teal-500/50 hover:shadow-[0_0_30px_rgba(20,184,166,0.15)] relative overflow-hidden" data-category="dev-tool" data-aos="fade-up" data-aos-delay="400">
+                    
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-teal-500 flex items-center justify-center text-white text-xl shadow-lg shrink-0">
+                                <i class="fas fa-file-code"></i>
+                            </div>
+                            <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white leading-tight">Text to Files Generator</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-md bg-teal-500/10 text-teal-500 text-[9px] font-black tracking-widest uppercase border border-teal-500/20 whitespace-nowrap ml-2">Dev Tool</span>
+                    </div>
+
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 flex-grow leading-relaxed">
+                        A fast, local development tool built to instantly convert text data into multiple structured file formats using simple commands.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">Node.js</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">File System</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 rounded-full text-[11px] font-semibold border border-slate-200 dark:border-slate-700">Scripts</span>
+                    </div>
+
+                    <div class="flex gap-3 mt-auto">
+                        <a href="https://gowtham2025.neocities.org/TEXT%20TO%20ALL%20FILES/in" target="_blank" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-400 text-white text-center font-bold text-sm shadow-[0_0_15px_rgba(20,184,166,0.3)] hover:scale-[1.02] transition-transform">Demo</a>
+                        <a href="https://github.com/Gowtham9443" target="_blank" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-[#1f2937] text-slate-800 dark:text-white text-center font-bold text-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">Code</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 md:mt-16 flex justify-center w-full relative z-20 px-4" data-aos="fade-up" data-aos-delay="100">
+                <a href="https://github.com/Gowtham9443?tab=repositories" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 md:px-10 md:py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold hover:scale-[1.03] transition-all duration-300 shadow-lg flex items-center justify-center group cursor-pointer border border-slate-700 dark:border-white/50 backdrop-blur-md">
+                    <i class="fab fa-github text-xl mr-3 group-hover:rotate-[360deg] transition-transform duration-700"></i>
+                    <span class="text-sm md:text-base tracking-wide">View More on GitHub</span>
                     <i class="fas fa-arrow-right ml-3 opacity-70 group-hover:translate-x-2 transition-transform duration-300 text-sm"></i>
                 </a>
             </div>
-        </div>    
+        </div>
     </section>
 
     <section id="publications" class="py-16 md:py-24 px-4 md:px-6 relative">
-        <!-- background decorative blobs -->
-        <div class="absolute top-1/2 right-0 -translate-y-1/2 w-[300px] h-[300px] bg-amber-500/10 dark:bg-amber-500/5 blur-[100px] rounded-full pointer-events-none blob-shape mix-blend-multiply dark:mix-blend-lighten z-0"></div>
+        <div class="absolute top-1/2 right-0 -translate-y-1/2 w-[300px] h-[300px] bg-accent/10 dark:bg-accent/20 blur-[120px] rounded-full pointer-events-none blob-shape mix-blend-screen z-0"></div>
         
         <div class="container mx-auto max-w-5xl relative z-10">
-            <!-- Section Header -->
-            <div class="text-left mb-8 md:mb-12" data-aos="fade-right">
-                <h2 class="text-3xl md:text-5xl font-black mb-3 tracking-tight color-cycle-text w-fit">Publication &amp; Copyright</h2>
+            <div class="text-center sm:text-left mb-8 md:mb-12" data-aos="fade-right">
+                <h2 class="text-3xl md:text-5xl font-black mb-3 tracking-tight color-cycle-text w-fit drop-shadow-sm mx-auto sm:mx-0">Publication &amp; Copyright</h2>
                 <p class="text-slate-600 dark:text-slate-400 font-medium text-sm md:text-base">Academic research contributions and intellectual property.</p>
             </div>
 
-            <!-- Publication Card -->
-            <div class="group relative rounded-[1.5rem] md:rounded-[2rem] transition-all duration-500 hover:-translate-y-2 z-10" data-aos="fade-up" data-aos-delay="100">
-                <!-- Background Ambient Glow on Hover -->
-                <div class="absolute inset-0 bg-gradient-to-r from-amber-500 via-purple-600 to-blue-600 rounded-[1.5rem] md:rounded-[2rem] blur-xl opacity-0 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity duration-700 -z-10"></div>
+            <div class="pub-card group relative rounded-[1.5rem] md:rounded-[2rem] transition-all duration-500 hover:-translate-y-2 z-10 text-center sm:text-left" data-aos="fade-up" data-aos-delay="100">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary rounded-[1.5rem] md:rounded-[2rem] blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-700 -z-10"></div>
                 
-                <!-- Card Container -->
-                <div class="bg-white dark:bg-[#151b2b] rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 border border-slate-200 dark:border-slate-800 shadow-xl relative overflow-hidden h-full">
-                    
-                    <!-- Shine Effect -->
-                    <div class="absolute top-0 left-[-100%] w-[50%] h-full bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent skew-x-[-20deg] group-hover:left-[200%] transition-all duration-1000 ease-in-out z-20 pointer-events-none"></div>
+                <div class="bg-white/80 dark:bg-slate-900/60 backdrop-blur-xl rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 border border-slate-200/50 dark:border-slate-700/50 shadow-xl relative overflow-hidden h-full">
+                    <div class="shine-layer"></div>
 
-                    <div class="flex flex-col md:flex-row gap-6 md:gap-8 relative z-10">
-                        <!-- Icon -->
+                    <div class="flex flex-col md:flex-row items-center sm:items-start gap-6 md:gap-8 relative z-10">
                         <div class="flex-shrink-0" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-lg shadow-amber-500/30 icon-float group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
-                                <i class="fas fa-file-alt"></i>
+                            <div class="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center text-white text-3xl shadow-glow-primary icon-float group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500 border border-white/20">
+                                <i class="fas fa-file-alt drop-shadow-md"></i>
                             </div>
                         </div>
                         
-                        <!-- Content -->
                         <div class="flex-grow">
                             <h3 class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-3 leading-snug">
                                 <span class="hover:color-cycle-text transition-colors duration-500">A Novel Adaptive Load-Aware Routing Protocol to Enhance Network Lifetime in Energy-Constrained Ad Hoc Networks</span>
                             </h3>
                             
-                            <div class="flex flex-wrap items-center gap-4 text-xs md:text-sm font-bold text-amber-600 dark:text-amber-500 mb-4 transform transition-transform duration-500 group-hover:translate-x-2">
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs md:text-sm font-bold text-primary mb-4 transform transition-transform duration-500 group-hover:translate-x-2">
                                 <span class="flex items-center gap-1.5"><i class="fas fa-university"></i> IEEE Conference</span>
                                 <span class="flex items-center gap-1.5"><i class="fas fa-calendar-alt"></i> 2025</span>
                             </div>
                             
-                            <p class="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed mb-6 md:mb-8 transition-colors duration-500 group-hover:text-slate-800 dark:group-hover:text-slate-200">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-6 md:mb-8 transition-colors duration-500">
                                 This research presents an adaptive load-aware routing protocol designed specifically for energy-constrained Ad Hoc networks. The framework intelligently balances network loads to significantly enhance overall network lifetime, delay mitigation, and robust data transmission in dynamic environments.
                             </p>
                             
-                            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-4 border-t border-slate-100 dark:border-slate-800/50">
-                                <a href="https://ieeexplore.ieee.org/document/11089872" target="_blank" class="group/btn px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl md:rounded-2xl font-bold flex items-center gap-2 text-xs md:text-sm transition-all shadow-lg shadow-blue-500/30 transform hover:scale-[1.03] hover:-translate-y-1 hover:shadow-indigo-500/50">
-                                    <i class="fas fa-file-pdf group-hover/btn:-rotate-12 transition-transform duration-300"></i> 
-                                    <span>View on IEEE Xplore</span>
+                            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-200 dark:border-slate-700/50">
+                                <a href="https://ieeexplore.ieee.org/document/11089872" target="_blank" class="group/btn px-5 py-2.5 md:px-6 md:py-3 bg-gradient-to-r from-primary to-accent hover:from-primary hover:to-accent text-white rounded-xl md:rounded-2xl font-bold flex items-center gap-2 text-xs md:text-sm transition-all shadow-glow-primary transform hover:scale-[1.03] hover:-translate-y-1 backdrop-blur-md w-full sm:w-auto justify-center">
+                                    <i class="fas fa-file-pdf group-hover/btn:-rotate-12 transition-transform duration-300"></i>
+                                     <span>View on IEEE Xplore</span>
                                     <i class="fas fa-external-link-alt text-[10px] opacity-70 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform duration-300 ml-1"></i>
                                 </a>
-                                <span class="text-[10px] md:text-xs text-slate-500 dark:text-slate-500 font-medium">
-                                    © 2025 IEEE. All rights reserved. Registered research publication.
+                                <span class="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 font-medium">
+                                    © 2025 IEEE. All rights reserved.
                                 </span>
                             </div>
                         </div>
@@ -590,167 +613,212 @@
         </div>
     </section>
 
-    <section id="certificates" class="py-16 md:py-24 px-4 md:px-6 section-alt">        
-        <div class="container mx-auto">            
-            <div class="text-center mb-12 md:mb-16" data-aos="fade-up">                
-                <h2 class="text-3xl md:text-4xl font-black mb-3 md:mb-4 uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Certificates</h2>                
-                <p class="text-blue-600 dark:text-blue-400 font-semibold tracking-[0.15em] md:tracking-[0.2em] uppercase text-[10px] md:text-xs">Professional Credentials</p>                
-                <div class="w-16 md:w-20 h-1.5 bg-blue-600 mx-auto rounded-full mt-4 md:mt-6 shadow-lg shadow-blue-500/50"></div>            
+    <section id="certificates" class="py-16 md:py-24 px-4 md:px-6 relative">
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <!-- Header aligned left to match skills section -->
+            <div class="mb-10 md:mb-14 text-left" data-aos="fade-right">
+                <h2 class="text-3xl md:text-5xl font-black mb-3 text-slate-900 dark:text-white tracking-tight">Certificates</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-primary to-primaryLight rounded-full mb-4"></div>
+                <p class="text-slate-600 dark:text-slate-400 font-medium text-sm md:text-base">Professional credentials and verified achievements.</p>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">                
-                <div class="cert-card p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col items-center text-center group" data-aos="zoom-in" data-aos-delay="100">                    
-                    <div class="shine-layer"></div>
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-red-100 dark:bg-red-900/30 text-red-600 rounded-2xl md:rounded-3xl flex items-center justify-center text-3xl md:text-4xl mb-5 md:mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(220,38,38,0.4)] relative z-10">                        
-                        <i class="fab fa-java"></i>                    
-                    </div>                    
-                    <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white mb-2 relative z-10">Java Programming</h3>                    
-                    <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-5 md:mb-6 leading-relaxed relative z-10">Advanced object-oriented programming, data structures, and multithreading concepts.</p>                    
-                    <a href="#" class="mt-auto inline-flex items-center text-blue-600 font-bold text-[10px] md:text-xs uppercase tracking-widest hover:gap-3 transition-all relative z-10">                        
-                        View Credential <i class="fas fa-arrow-right ml-2"></i>                    
-                    </a>                
-                </div>
-
-                <div class="cert-card p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col items-center text-center group" data-aos="zoom-in" data-aos-delay="200">                    
-                    <div class="shine-layer"></div>
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-teal-100 dark:bg-teal-900/30 text-teal-600 rounded-2xl md:rounded-3xl flex items-center justify-center text-3xl md:text-4xl mb-5 md:mb-6 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(13,148,136,0.4)] relative z-10">                        
-                        <i class="fab fa-python"></i>                    
-                    </div>                    
-                    <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white mb-2 relative z-10">Python for Data Science</h3>                    
-                    <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-5 md:mb-6 leading-relaxed relative z-10">Comprehensive study of scripting, automation, and data analysis libraries.</p>                    
-                    <a href="#" class="mt-auto inline-flex items-center text-blue-600 font-bold text-[10px] md:text-xs uppercase tracking-widest hover:gap-3 transition-all relative z-10">                        
-                        View Credential <i class="fas fa-arrow-right ml-2"></i>                    
-                    </a>                
-                </div>
-
-                <div class="cert-card p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] flex flex-col items-center text-center group" data-aos="zoom-in" data-aos-delay="300">                    
-                    <div class="shine-layer"></div>
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-2xl md:rounded-3xl flex items-center justify-center text-3xl md:text-4xl mb-5 md:mb-6 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] relative z-10">                        
-                        <i class="fas fa-database"></i>                    
-                    </div>                    
-                    <h3 class="text-lg md:text-xl font-bold text-slate-800 dark:text-white mb-2 relative z-10">MySQL Database</h3>                    
-                    <p class="text-slate-600 dark:text-slate-400 text-xs md:text-sm mb-5 md:mb-6 leading-relaxed relative z-10">Expertise in relational databases, complex queries, and performance optimization.</p>                    
-                    <a href="#" class="mt-auto inline-flex items-center text-blue-600 font-bold text-[10px] md:text-xs uppercase tracking-widest hover:gap-3 transition-all relative z-10">                        
-                        View Credential <i class="fas fa-arrow-right ml-2"></i>                    
-                    </a>                
-                </div>            
-            </div>        
-        </div>    
-    </section>
-
-    <section id="contact" class="py-16 md:py-24 px-4 md:px-6">        
-        <div class="container mx-auto max-w-6xl">            
-            <div class="grid lg:grid-cols-2 gap-12 md:gap-16">                
-                <div data-aos="fade-right">                    
-                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4 md:mb-6 uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Let's Talk</h2>                    
-                    <p class="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-8 md:mb-10 leading-relaxed">                        
-                        Whether you have a specific project in mind or just want to chat about tech, I'm always open to new opportunities and collaborations. Follow my journey across platforms:                    
-                    </p>                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">                        
-                        <a href="https://www.linkedin.com/in/gowtham-m-96aa162a0" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-sm group hover:border-blue-600 transition-all duration-300">                            
-                            <div class="shine-layer"></div>
-                            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center rounded-xl text-lg group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 relative z-10">                                
-                                <i class="fab fa-linkedin-in"></i>                            
-                            </div>                            
-                            <div class="relative z-10">                                
-                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">LinkedIn</p>                                
-                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">Gowtham M</p>                            
-                            </div>                        
-                        </a>                        
-                        <a href="https://github.com/Gowtham9443" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-sm group hover:border-slate-900 dark:hover:border-white transition-all duration-300">                            
-                            <div class="shine-layer"></div>
-                            <div class="w-10 h-10 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white flex items-center justify-center rounded-xl text-lg group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-900 transition-all duration-300 relative z-10">                                
-                                <i class="fab fa-github"></i>                            
-                            </div>                            
-                            <div class="relative z-10">                                
-                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">GitHub</p>                                
-                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">Gowtham9443</p>                            
-                            </div>                        
-                        </a>                        
-                        <a href="https://x.com/jaddumad" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-sm group hover:border-blue-400 transition-all duration-300">                            
-                            <div class="shine-layer"></div>
-                            <div class="w-10 h-10 bg-blue-50 dark:bg-blue-900/20 text-blue-400 flex items-center justify-center rounded-xl text-lg group-hover:bg-blue-400 group-hover:text-white transition-all duration-300 relative z-10">                                
-                                <i class="fab fa-x-twitter"></i>                            
-                            </div>                            
-                            <div class="relative z-10">                                
-                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Twitter</p>                                
-                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">@jaddumad</p>                            
-                            </div>                        
-                        </a>                        
-                        <a href="https://www.instagram.com/gowtham_h_official/" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-sm group hover:border-pink-600 transition-all duration-300">                            
-                            <div class="shine-layer"></div>
-                            <div class="w-10 h-10 bg-pink-50 dark:bg-pink-900/20 text-pink-600 flex items-center justify-center rounded-xl text-lg group-hover:bg-pink-600 group-hover:text-white transition-all duration-300 relative z-10">                                
-                                <i class="fab fa-instagram"></i>                            
-                            </div>                            
-                            <div class="relative z-10">                                
-                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Instagram</p>                                
-                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">gowtham_h_official</p>                            
-                            </div>                        
-                        </a>                    
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Certificate 1: Java -->
+                <div class="group bg-white dark:bg-[#111827] rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-6 md:p-8 flex flex-col transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_10px_30px_-15px_rgba(14,165,233,0.3)] hover:border-primary/50 dark:hover:border-primary/50 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/20 transition-all duration-500 pointer-events-none"></div>
+                    
+                    <div class="flex items-start justify-between mb-6 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primaryLight flex items-center justify-center text-white text-2xl shadow-lg shadow-primary/20 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 text-[10px] font-black tracking-widest uppercase rounded-full border border-slate-200 dark:border-slate-700">Verified</span>
                     </div>
 
-                    <div class="mt-6 md:mt-8 p-5 md:p-6 rounded-[1.5rem] md:rounded-3xl bg-blue-600 text-white shadow-[0_10px_30px_rgba(37,99,235,0.3)] flex items-center justify-between hover:scale-[1.02] md:hover:scale-[1.03] transition-all duration-300 cursor-pointer" onclick="window.location.href='tel:+919842123720'">                        
-                        <div class="flex items-center space-x-3 md:space-x-4">                            
-                            <div class="text-xl md:text-2xl opacity-80"><i class="fas fa-phone-alt animate-bounce"></i></div>                            
-                            <div>                                
-                                <p class="text-[9px] md:text-[10px] font-bold uppercase opacity-70 tracking-widest">Call Me Directly</p>                                
-                                <p class="text-base md:text-lg font-bold">+91-9842123720</p>                            
-                            </div>                        
-                        </div>                        
-                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center transform transition-transform group-hover:translate-x-2">                            
-                            <i class="fas fa-arrow-right text-sm"></i>                        
-                        </div>                    
-                    </div>                
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-3 relative z-10">Java Programming</h3>
+                    
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-8 flex-grow leading-relaxed relative z-10">
+                        Advanced object-oriented programming, data structures, and multithreading concepts.
+                    </p>
+
+                    <div class="mt-auto relative z-10 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <a href="https://drive.google.com/file/d/13flSmCr2os5movjtMQYPNVeaNnq6G1xI/view?usp=sharing" target="_blank" class="inline-flex items-center text-sm font-bold text-slate-700 dark:text-slate-300 group/link hover:text-primary dark:hover:text-primaryLight transition-colors">
+                            View Credential 
+                            <i class="fas fa-arrow-right ml-2 text-primary transform transition-transform group-hover/link:translate-x-1.5"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-6 md:p-8 rounded-[2rem] md:rounded-3xl shadow-xl md:shadow-2xl border border-slate-200/50 dark:border-slate-700/50 relative overflow-hidden" data-aos="fade-left">                    
-                    <div class="absolute top-[-50px] right-[-50px] w-[150px] h-[150px] bg-blue-600/5 dark:bg-blue-600/10 blur-[30px] rounded-full pointer-events-none"></div>
-                    <form id="contactForm" class="space-y-5 md:space-y-6 relative z-10">                        
-                        <div class="grid sm:grid-cols-2 gap-5 md:gap-6">                            
-                            <div class="group/input">                                
-                                <label class="block text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-blue-600 transition-colors">Name</label>                                
-                                <input type="text" id="contactName" required="" class="w-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-sm md:text-base">                            
-                            </div>                            
-                            <div class="group/input">                                
-                                <label class="block text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-blue-600 transition-colors">Email</label>                                
-                                <input type="email" id="contactEmail" required="" class="w-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 text-sm md:text-base">                            
-                            </div>                        
-                        </div>                        
-                        <div class="group/input">                            
-                            <label class="block text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-blue-600 transition-colors">Message</label>                            
-                            <textarea id="contactMessage" rows="4" required="" class="w-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all duration-300 resize-none text-sm md:text-base"></textarea>                        
-                        </div>                        
-                        <button type="submit" class="w-full py-4 md:py-5 bg-green-600 hover:bg-green-500 text-white rounded-xl font-bold shadow-[0_10px_20px_rgba(22,163,74,0.3)] transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-3 group text-sm md:text-base">                            
-                            Send via WhatsApp <i class="fab fa-whatsapp text-lg md:text-xl group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300"></i>                        
-                        </button>                    
-                    </form>                
-                </div>            
-            </div>        
-        </div>    
+                <!-- Certificate 2: Python -->
+                <div class="group bg-white dark:bg-[#111827] rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-6 md:p-8 flex flex-col transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_10px_30px_-15px_rgba(99,102,241,0.3)] hover:border-accent/50 dark:hover:border-accent/50 relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-500 pointer-events-none"></div>
+                    
+                    <div class="flex items-start justify-between mb-6 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-indigo-400 flex items-center justify-center text-white text-2xl shadow-lg shadow-accent/20 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 text-[10px] font-black tracking-widest uppercase rounded-full border border-slate-200 dark:border-slate-700">Verified</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-3 relative z-10">Python for Data Science</h3>
+                    
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-8 flex-grow leading-relaxed relative z-10">
+                        Comprehensive study of scripting, automation, and data analysis libraries.
+                    </p>
+
+                    <div class="mt-auto relative z-10 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <a href="https://drive.google.com/file/d/1J5OfnsLC8IpTJ_LaEeCEKmEU3mPlYpOp/view?usp=sharing" target="_blank" class="inline-flex items-center text-sm font-bold text-slate-700 dark:text-slate-300 group/link hover:text-accent dark:hover:text-indigo-400 transition-colors">
+                            View Credential 
+                            <i class="fas fa-arrow-right ml-2 text-accent transform transition-transform group-hover/link:translate-x-1.5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Certificate 3: MySQL -->
+                <div class="group bg-white dark:bg-[#111827] rounded-[1.5rem] border border-slate-200 dark:border-slate-800/80 p-6 md:p-8 flex flex-col transition-all duration-400 hover:-translate-y-2 hover:shadow-[0_10px_30px_-15px_rgba(59,130,246,0.3)] hover:border-secondary/50 dark:hover:border-secondary/50 relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-secondary/5 rounded-full blur-2xl group-hover:bg-secondary/20 transition-all duration-500 pointer-events-none"></div>
+                    
+                    <div class="flex items-start justify-between mb-6 relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-secondary to-blue-400 flex items-center justify-center text-white text-2xl shadow-lg shadow-secondary/20 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 text-[10px] font-black tracking-widest uppercase rounded-full border border-slate-200 dark:border-slate-700">Verified</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold text-slate-800 dark:text-white mb-3 relative z-10">MySQL Database</h3>
+                    
+                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-8 flex-grow leading-relaxed relative z-10">
+                        Expertise in relational databases, complex queries, and performance optimization.
+                    </p>
+
+                    <div class="mt-auto relative z-10 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <a href="https://drive.google.com/file/d/1pqeUjpwtLVQPPLMLzV2KRclA0KmHV_dt/view?usp=sharing" target="_blank" class="inline-flex items-center text-sm font-bold text-slate-700 dark:text-slate-300 group/link hover:text-secondary dark:hover:text-blue-400 transition-colors">
+                            View Credential 
+                            <i class="fas fa-arrow-right ml-2 text-secondary transform transition-transform group-hover/link:translate-x-1.5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <footer class="py-10 md:py-12 px-4 md:px-6 border-t border-slate-200/50 dark:border-slate-800/50 text-center relative overflow-hidden bg-slate-50/50 dark:bg-slate-900/20">        
-        <div class="absolute bottom-[-100px] left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-blue-600/5 dark:bg-blue-600/10 blur-[80px] rounded-full pointer-events-none"></div>
-        <div class="container mx-auto relative z-10">            
-            <a href="#" class="text-xl md:text-2xl font-black mb-4 md:mb-6 block hover:scale-110 transition-transform duration-300 text-slate-900 dark:text-white">Gowtham<span class="text-blue-600">.</span></a>            
-            <div class="flex justify-center space-x-5 md:space-x-6 mb-6 md:mb-8 text-lg md:text-xl">                
-                <a href="https://github.com/Gowtham9443" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-2"><i class="fab fa-github"></i></a>                
-                <a href="https://www.linkedin.com/in/gowtham-m-96aa162a0" target="_blank" class="text-slate-400 hover:text-blue-600 transition-all duration-300 hover:-translate-y-2"><i class="fab fa-linkedin-in"></i></a>                
-                <a href="https://x.com/jaddumad" target="_blank" class="text-slate-400 hover:text-blue-400 transition-all duration-300 hover:-translate-y-2"><i class="fab fa-x-twitter"></i></a>                
-                <a href="https://www.instagram.com/gowtham_h_official/" target="_blank" class="text-slate-400 hover:text-pink-600 transition-all duration-300 hover:-translate-y-2"><i class="fab fa-instagram"></i></a>                
-                <a href="https://www.facebook.com/people/Gowtham-Raj/pfbid0216AYBKMDEXUnQN2TVZFgxiFgHdSnFwdzj6FihCxTZwDVBcrXAjJeGGf1yuKXBizFl/" target="_blank" class="text-slate-400 hover:text-blue-600 transition-all duration-300 hover:-translate-y-2"><i class="fab fa-facebook-f"></i></a>            
-            </div>            
-            <p class="text-slate-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">                
-                © 2026 Gowtham M.<i class="#"></i>           
-            </p>        
-        </div>    
+    <section id="contact" class="py-16 md:py-24 px-4 md:px-6 relative">
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 md:gap-16">
+                <div data-aos="fade-right" class="text-center sm:text-left">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4 md:mb-6 uppercase tracking-tight color-cycle-text w-fit mx-auto sm:mx-0">Let's Talk</h2>
+                    <p class="text-base md:text-lg text-slate-600 dark:text-slate-300 mb-8 md:mb-10 leading-relaxed text-center sm:text-left">
+                        Whether you have a specific project in mind or just want to chat about tech, I'm always open to new opportunities and collaborations. Follow my journey across platforms:
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 text-left">
+                        <a href="https://www.linkedin.com/in/gowtham-m-96aa162a0" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-lg group hover:border-primary transition-all duration-300 bg-white/60 dark:bg-slate-900/50 backdrop-blur-md">
+                            <div class="shine-layer"></div>
+                            <div class="w-10 h-10 bg-primary/10 text-primary flex items-center justify-center rounded-xl text-lg group-hover:bg-primary group-hover:text-white transition-all duration-300 relative z-10 shadow-[0_0_10px_transparent] group-hover:shadow-glow-primary">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">LinkedIn</p>
+                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">Gowtham M</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://github.com/Gowtham9443" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-lg group hover:border-slate-400 transition-all duration-300 bg-white/60 dark:bg-slate-900/50 backdrop-blur-md">
+                            <div class="shine-layer"></div>
+                            <div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white flex items-center justify-center rounded-xl text-lg group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-slate-900 transition-all duration-300 relative z-10 shadow-[0_0_10px_transparent] group-hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">GitHub</p>
+                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">Gowtham9443</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://x.com/jaddumad" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-lg group hover:border-accent transition-all duration-300 bg-white/60 dark:bg-slate-900/50 backdrop-blur-md">
+                            <div class="shine-layer"></div>
+                            <div class="w-10 h-10 bg-accent/10 text-accent flex items-center justify-center rounded-xl text-lg group-hover:bg-accent group-hover:text-white transition-all duration-300 relative z-10 shadow-[0_0_10px_transparent] group-hover:shadow-glow-accent">
+                                <i class="fab fa-x-twitter"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Twitter</p>
+                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">@jaddumad</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://www.instagram.com/gowtham_h_official/" target="_blank" class="edu-card flex items-center space-x-4 p-4 md:p-5 rounded-2xl shadow-lg group hover:border-secondary transition-all duration-300 bg-white/60 dark:bg-slate-900/50 backdrop-blur-md">
+                            <div class="shine-layer"></div>
+                            <div class="w-10 h-10 bg-secondary/10 text-secondary flex items-center justify-center rounded-xl text-lg group-hover:bg-secondary group-hover:text-white transition-all duration-300 relative z-10 shadow-[0_0_10px_transparent] group-hover:shadow-glow-secondary">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <p class="text-[9px] md:text-[10px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider">Instagram</p>
+                                <p class="font-bold text-xs md:text-sm text-slate-800 dark:text-slate-100">gowtham_h_official</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="mt-6 md:mt-8 p-5 md:p-6 rounded-[1.5rem] md:rounded-3xl bg-gradient-to-r from-primary to-accent text-white shadow-glow-primary flex items-center justify-between hover:scale-[1.03] transition-all duration-300 cursor-pointer backdrop-blur-md border border-white/10 text-left" onclick="window.location.href='tel:+919842123720'">
+                        <div class="flex items-center space-x-3 md:space-x-4">
+                            <div class="text-xl md:text-2xl opacity-90"><i class="fas fa-phone-alt animate-bounce"></i></div>
+                            <div>
+                                <p class="text-[9px] md:text-[10px] font-bold uppercase opacity-80 tracking-widest">Call Me Directly</p>
+                                <p class="text-base md:text-lg font-bold drop-shadow-sm">+91-9842123720</p>
+                            </div>
+                        </div>
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-full flex items-center justify-center transform transition-transform group-hover:translate-x-2 backdrop-blur-sm">
+                            <i class="fas fa-arrow-right text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl p-6 md:p-8 rounded-[2rem] md:rounded-3xl shadow-2xl border border-slate-200/50 dark:border-white/10 relative overflow-hidden" data-aos="fade-left">
+                    <div class="absolute top-[-50px] right-[-50px] w-[150px] h-[150px] bg-primary/10 dark:bg-primaryLight/10 blur-[40px] rounded-full pointer-events-none"></div>
+                    
+                    <form id="contactForm" class="space-y-5 md:space-y-6 relative z-10 text-left">
+                        <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+                            <div class="group/input">
+                                <label class="block text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-primary dark:group-focus-within/input:text-primaryLight transition-colors">Name</label>
+                                <input type="text" id="contactName" required="" class="w-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white focus:border-primary dark:focus:border-primaryLight focus:ring-2 focus:ring-primary/20 dark:focus:ring-primaryLight/20 outline-none transition-all duration-300 text-sm md:text-base backdrop-blur-sm">
+                            </div>
+                            <div class="group/input">
+                                <label class="block text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-primary dark:group-focus-within/input:text-primaryLight transition-colors">Email</label>
+                                <input type="email" id="contactEmail" required="" class="w-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white focus:border-primary dark:focus:border-primaryLight focus:ring-2 focus:ring-primary/20 dark:focus:ring-primaryLight/20 outline-none transition-all duration-300 text-sm md:text-base backdrop-blur-sm">
+                            </div>
+                        </div>
+                        <div class="group/input">
+                            <label class="block text-xs md:text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 group-focus-within/input:text-primary dark:group-focus-within/input:text-primaryLight transition-colors">Message</label>
+                            <textarea id="contactMessage" rows="4" required="" class="w-full px-4 py-3.5 md:px-5 md:py-4 rounded-xl bg-white/50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-700/80 text-slate-900 dark:text-white focus:border-primary dark:focus:border-primaryLight focus:ring-2 focus:ring-primary/20 dark:focus:ring-primaryLight/20 outline-none transition-all duration-300 resize-none text-sm md:text-base backdrop-blur-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 md:py-5 bg-gradient-to-r from-primary to-secondary hover:from-primary hover:to-secondary text-white rounded-xl font-bold shadow-glow-primary transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-3 group text-sm md:text-base border border-white/20">
+                            Send via WhatsApp <i class="fab fa-whatsapp text-lg md:text-xl group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-10 md:py-12 px-4 md:px-6 border-t border-slate-200/50 dark:border-white/5 text-center relative overflow-hidden bg-slate-50/50 dark:bg-slate-950/80 backdrop-blur-xl">
+        <div class="absolute bottom-[-100px] left-1/2 -translate-x-1/2 w-[300px] h-[300px] bg-primary/5 dark:bg-primaryLight/5 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="container mx-auto relative z-10">
+            <a href="#" class="text-xl md:text-2xl font-black mb-4 md:mb-6 block hover:scale-110 transition-transform duration-300 text-slate-900 dark:text-white">Gowtham<span class="text-secondary">.</span></a>
+            <div class="flex justify-center space-x-5 md:space-x-6 mb-6 md:mb-8 text-lg md:text-xl">
+                <a href="https://github.com/Gowtham9443" target="_blank" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300 hover:-translate-y-2"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/gowtham-m-96aa162a0" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-primaryLight transition-all duration-300 hover:-translate-y-2"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://x.com/jaddumad" target="_blank" class="text-slate-400 hover:text-accent dark:hover:text-accent transition-all duration-300 hover:-translate-y-2"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.instagram.com/gowtham_h_official/" target="_blank" class="text-slate-400 hover:text-secondary dark:hover:text-secondary transition-all duration-300 hover:-translate-y-2"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/people/Gowtham-Raj/pfbid0216AYBKMDEXUnQN2TVZFgxiFgHdSnFwdzj6FihCxTZwDVBcrXAjJeGGf1yuKXBizFl/" target="_blank" class="text-slate-400 hover:text-primary dark:hover:text-primary transition-all duration-300 hover:-translate-y-2"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p class="text-slate-500 text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                © 2026 Gowtham M.<i class="#"></i>
+            </p>
+        </div>
     </footer>
 
-    <button id="btt" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-blue-600 text-white rounded-xl md:rounded-2xl shadow-2xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 hover:-translate-y-2 z-40 focus:outline-none">        
-        <i class="fas fa-chevron-up text-sm md:text-base"></i>    
+    <button id="btt" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-t from-primary to-accent text-white rounded-xl md:rounded-2xl shadow-glow-primary flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 hover:-translate-y-2 z-40 focus:outline-none border border-white/20">
+        <i class="fas fa-chevron-up text-sm md:text-base"></i>
     </button>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>    
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     
 
 <script src="script.js"></script></body></html>
